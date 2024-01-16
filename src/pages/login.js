@@ -16,15 +16,15 @@ export default function Login() {
       <SafeAreaView className="mx-5 px-5 ">
         <View className="items-center">
           <Image
-            source={require("../../assets/logo.png")}
+            source={require("../../assets/logo2.png")}
             className="object-scale-down h-48 w-96"
           />
         </View>
 
-        <View className="m-4 mt-10">
-          <Text className="text-3xl font-semibold text-red-700 ">Sign In </Text>
-          <View className="mt-5">
-            <Text className="text-lg">Email </Text>
+        <View className="m-4 mt-3">
+          <Text className="text-2xl font-bold text-red-700 ">Sign In </Text>
+          <View className="mt-3">
+            <Text style={styles.fontSize}>Email </Text>
 
             <TextInput
               placeholder="input your email"
@@ -32,8 +32,9 @@ export default function Login() {
               className="mt-1 w-full rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
           </View>
+
           <View className="mt-5">
-            <Text className="text-lg">Password </Text>
+            <Text style={styles.fontSize}>Password </Text>
 
             <TextInput
               placeholder=" input your password"
@@ -42,7 +43,7 @@ export default function Login() {
             />
           </View>
 
-          <View className="mt-5">
+          <View className="mt-4">
             <TouchableOpacity className="hover:shadow-form w-full rounded-md bg-red-700 py-3 px-8  outline-none flex items-center justify-center">
               <Text className="text-m font-bold text-white">Sign In</Text>
             </TouchableOpacity>
@@ -64,11 +65,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2f2f2",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: -60,
+    // marginTop: -50,
   },
   textOption: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10
   },
+  fontSize : {
+    fontSize: 15
+  }
 });
