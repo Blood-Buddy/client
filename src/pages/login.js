@@ -21,7 +21,7 @@ export default function Login() {
           />
         </View>
 
-        <View className="m-4 mt-3">
+        <View className="m-4 mt-7">
           <Text className="text-2xl font-bold text-red-700 ">Sign In </Text>
           <View className="mt-3">
             <Text style={styles.fontSize}>Email </Text>
@@ -51,7 +51,7 @@ export default function Login() {
 
           <View className="mt-2" style={styles.textOption}>
             <Text className="text-s text-gray-500 ">Forgot Password? </Text>
-            <Text className="text-s text-gray-500 ">Sign Up </Text>
+            <Text className="text-s text-red-700 ">Sign Up </Text>
           </View>
         </View>
       </SafeAreaView>
