@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Homepage from './src/pages/Homepage';
 import Login from './src/pages/login';
+import Register from './src/pages/register';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
     //   <StatusBar style="auto" />
     // </View>
     // <Homepage/>
-    <Login/>
+    // <Login/>
+    < Register/>
   );
 }
