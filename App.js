@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Text, View } from 'react-native';
 import Homepage from './src/pages/Homepage';
+import Login from './src/pages/login';
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
     //   <Text>Open up App.js to start working on your app!</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <Homepage/>
+    // <Homepage/>
+    <Login/>
   );
 }
