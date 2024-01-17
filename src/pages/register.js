@@ -15,7 +15,7 @@ export default function Register() {
     <View style={styles.container}>
       <SafeAreaView className="mx-5 pl-5 pr-5  ">
         <View className="h-48 w-96">
-          <Text className="text-2xl ml-4 font-bold text-red-700 ">
+          <Text className="text-3xl ml-4 font-bold text-red-700 ">
             Create Account
           </Text>
 
@@ -51,12 +51,12 @@ export default function Register() {
 
           <View className="mt-4">
             <TouchableOpacity className="hover:shadow-form rounded-md bg-red-700 py-3 px-8 mx-4 outline-none flex items-center justify-center">
-              <Text className="text-m font-bold text-white">Sign Up</Text>
+              <Text className="text-lg font-bold text-white">Sign Up</Text>
             </TouchableOpacity>
           </View>
 
           <View className="mt-2" style={styles.textOption}>
-            <Text className="text-s ml-4 text-gray-500 ">Already have an account? </Text>
+            <Text className="text-s ml-4 text-gray-500 ">Already have an account? Sign In</Text>
           </View>
         </View>
       </SafeAreaView>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   fontSize: {
-    fontSize: 15,
+    fontSize: 16,
     marginLeft:20
-  },
+  }
 });
