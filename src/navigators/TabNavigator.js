@@ -12,7 +12,7 @@ export default function TabNavigator() {
         <Tab.Navigator screenOptions={{ tabBarInactiveTintColor: "grey", tabBarActiveTintColor: '#AE2111', }}>
             <Tab.Screen name="Homepage" component={Homepage} options={{
                 headerShown: false,
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                     if(focused) {
                     return <Ionicons name="home-sharp" size={24} color="#AE2111" />
                     } else {
@@ -22,7 +22,7 @@ export default function TabNavigator() {
             }} />
             <Tab.Screen name="Jadwal" component={Schedule} options={{
                 headerShown: false,
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                     if(focused) {
                     return <Ionicons name="water" size={24} color="#AE2111" />
                     } else {
@@ -32,17 +32,17 @@ export default function TabNavigator() {
             }} />
             <Tab.Screen name="Rewards" component={Rewards} options={{
                 headerShown: false,
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                     if(focused) {
-                    return <Ionicons name="trophy" size={24} color="#AE2111" />
+                    return <Ionicons name="gift" size={24} color="#AE2111" />
                     } else {
-                        return <Ionicons name="trophy-outline" size={24} color={'#AE2111'} />
+                        return <Ionicons name="gift-outline" size={24} color={'#AE2111'} />
                     }
                 }
             }} />
             <Tab.Screen name="Pengaturan" component={Settings} options={{
                 headerShown: false,
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                     if(focused) {
                     return <Ionicons name="settings" size={24} color="#AE2111" />
                     } else {
