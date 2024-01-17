@@ -47,8 +47,8 @@ export default function Homepage() {
 
                 <WideButton label="History" />
 
-                <View className="mt-2 border-b-2 flex-row items-center border-b-red-700">
-                    <Text className="font-bold text-2xl border border-b-red-700 mb-2">Permintaan terbaru</Text>
+                <View className="mt-2 border-b-2 flex-row border-b-red-700">
+                    <Text className="font-bold text-2xl mb-2">Permintaan terbaru</Text>
                 </View>
 
                 <RequestCard />
