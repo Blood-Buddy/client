@@ -1,32 +1,62 @@
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Feather } from '@expo/vector-icons';
 import React from "react";
+import RequestCard from "../components/RequestCard";
+import WideButton from "../components/WideButton";
 
 export default function Homepage() {
     return (
-        <ScrollView className="bg-[#F2F2F2]">
-            <SafeAreaView className="mx-5 px-5">
-
-                <View className="border-b-2 border-b-red-700">
-                    <Text className="font-bold text-2xl border border-b-red-700 mb-2">Profil</Text>
+        <SafeAreaView className="bg-[#F2F2F2]">
+            <ScrollView className='px-5'>
+                <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
+                    <Text className="font-bold text-2xl mb-2">Profil</Text>
+                    <TouchableOpacity>
+                        <Feather name="edit-3" size={24} className="text-red-700" />
+                    </TouchableOpacity>
                 </View>
 
                 <View className="flex-1 flex-row">
-                    <View className="mt-2 text-gray-500 w-2/3 border-r-2 border-r-red-700">
+                    <View className="mt-2 w-2/3 border-r-2 border-r-red-700">
                         <Text className="font-bold text-lg">Mukhtar Rafi Fauzi</Text>
                         <Text className="text-md text-red-700">3173062302960002</Text>
                     </View>
-                    <View className="text-gray-500 w-1/3"></View>
 
+                    <View className="w-1/3">
+                        <View className="flex-1 flex-row items-center">
+                            <Image className='ml-2 mt-2' source={require('../../assets/bloodIcon32.png')}></Image>
+                            <Text className="ml-2 mt-4 text-4xl font-bold">B</Text>
+                        </View>
+                    </View>
                 </View>
 
-            </SafeAreaView>
-        </ScrollView>
+                <View className="flex-1 flex-row h-14 items-center">
+                    <View className="mt-2 pr-2 w-1/3 border-r-2 border-r-red-700">
+                        <Text className="font-bold text-sm text-red-700">Total Donor</Text>
+                        <Text className="text-md">0 kali</Text>
+                    </View>
+                    <View className="mt-2 px-2 w-1/3 border-r-2 border-r-red-700">
+                        <Text className="font-bold text-sm text-red-700">Donor Terakhir</Text>
+                        <Text className="text-md ">24-12-2024</Text>
+                    </View>
+
+                    <View className="mt-2 px-2 w-1/3">
+                        <Text className="font-bold text-sm text-red-700">Rewards</Text>
+                        <Text className="text-md">100</Text>
+                    </View>
+                </View>
+
+                <WideButton label="History" />
+
+                <View className="mt-2 border-b-2 flex-row items-center border-b-red-700">
+                    <Text className="font-bold text-2xl border border-b-red-700 mb-2">Permintaan terbaru</Text>
+                </View>
+
+                <RequestCard />
+                <RequestCard />
+                <RequestCard />
+                <RequestCard />
+                <RequestCard />
+            </ScrollView>
+        </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    borderBottom: {
-        borderBottomColor: "red",
-        borderBottomWidth: 1,
-    }
-});
