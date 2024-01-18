@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import Homepage from './src/pages/Homepage';
 import Login from './src/pages/login';
 import Register from './src/pages/register';
+import Voucher from './src/pages/voucher';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
     // </View>
     // <Homepage/>
     // <Login/>
-    < Register/>
+    // < Register/>
+    < Voucher/>
   );
 }
