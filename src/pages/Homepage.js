@@ -1,5 +1,5 @@
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import React from "react";
 import RequestCard from "../components/RequestCard";
 import WideButton from "../components/WideButton";
@@ -41,7 +41,10 @@ export default function Homepage() {
 
                     <View className="mt-2 px-2 w-1/3">
                         <Text className="font-bold text-sm text-red-700">Rewards</Text>
-                        <Text className="text-md">100</Text>
+                        <View className='flex flex-row items-center'>
+                            <FontAwesome5 name="award" size={20} color="#AE2111" />
+                            <Text className="text-lg ml-1">100</Text>
+                        </View>
                     </View>
                 </View>
 
