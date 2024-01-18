@@ -7,7 +7,7 @@ export default function RequestCard() {
             <Text className='mt-2 mx-6 '>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis provident aliquam tenetur exercitationem possimus aspernatur molestias perferendis assumenda corrupti, veniam saepe earum similique tempore neque facilis quibusdam dolorem. Minus, quas?</Text>
             <View className="flex-row-reverse">
                 <TouchableOpacity className="my-4 mx-6 bg-red-700 py-2 rounded-lg w-1/4 items-center justify-center">
-                    <Text className="text-[#f2f2f2] font-bold">Detail</Text>
+                    <Text className="text-[#f2f2f2] font-bold">Book Appointment</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -20,7 +20,7 @@ export default function TabNavigator() {
                     }
                 }
             }} />
-            <Tab.Screen name="Jadwal" component={Schedule} options={{
+            <Tab.Screen name="Appointment" component={Schedule} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     if(focused) {
@@ -40,7 +40,7 @@ export default function TabNavigator() {
                     }
                 }
             }} />
-            <Tab.Screen name="Pengaturan" component={Settings} options={{
+            <Tab.Screen name="Settings" component={Settings} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     if(focused) {
