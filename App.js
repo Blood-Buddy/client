@@ -7,10 +7,12 @@ import Register from './src/pages/register';
 
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './src/navigators/TabNavigator';
+import StackNavigator from './src/navigators/StackNavigator';
 export default function App() {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      {/* <TabNavigator /> */}
+      <StackNavigator/>
     </NavigationContainer>
   );
 }

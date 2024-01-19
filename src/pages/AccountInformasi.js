@@ -9,8 +9,14 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { Animated } from "react-native";
+
 
 export default function AccountInformasi() {
+  const av = new Animated.Value(0);
+  av.addListener(() => {
+    return;
+  });
   return (
     <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">

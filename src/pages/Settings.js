@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function Setting() {
+export default function Setting({ navigation }) {
   return (
     <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">
@@ -22,7 +22,7 @@ export default function Setting() {
         <View className="">
           <View style={styles.card} className="flex flex-row">
             <View className="mr-3">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Account Information")}>
                 <MaterialCommunityIcons
                   name="account-outline"
                   size={24}
@@ -31,7 +31,7 @@ export default function Setting() {
               </TouchableOpacity>
             </View>
             <View className="">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Account Information")}>
                 <Text className="text-lg font-medium"> Edit Profile</Text>
               </TouchableOpacity>
             </View>
