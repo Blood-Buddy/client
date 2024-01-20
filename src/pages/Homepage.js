@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
+import { Feather, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import React from "react";
 import RequestCard from "../components/RequestCard";
 import WideButton from "../components/WideButton";
@@ -38,16 +38,14 @@ export default function Homepage({ navigation }) {
             <Text className="text-md text-red-700">3173062302960002</Text>
           </View>
 
-          <View className="w-1/3">
-            <View className="flex-1 flex-row items-center">
-              <Image
-                className="ml-2 mt-2"
-                source={require("../../assets/bloodIcon32.png")}
-              ></Image>
-              <Text className="ml-2 mt-4 text-4xl font-bold">B</Text>
-            </View>
-          </View>
-        </View>
+
+                    <View className="w-1/3">
+                        <View className="flex-1 flex-row items-center">
+                            <Ionicons name="water" size={32} color="#AE2111" />
+                            <Text className="ml-2 text-4xl font-bold">B</Text>
+                        </View>
+                    </View>
+                </View>
 
         <View className="flex-1 flex-row h-14 items-center">
           <View className="mt-2 pr-2 w-1/3 border-r-2 border-r-red-700">
