@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import { Animated } from "react-native";
+import WideButton from "../components/WideButton";
 
 
 export default function AccountInformasi() {
@@ -17,17 +18,17 @@ export default function AccountInformasi() {
     return;
   });
   return (
-    <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">
-        <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
+    <ScrollView className="bg-[#F2F2F2]">
+        {/* <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
           <Text className="font-bold text-2xl mb-2">Account Information</Text>
           <TouchableOpacity>
             <Feather name="check" size={24} color="black" />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
-        <View className="mt-5">
-          <Text className="text-gray-700 text-base">General Info</Text>
+        <View className="mt-5 border-b-2 border-b-red-700">
+          <Text className="text-red-700 font-bold text-3xl">General Info</Text>
         </View>
 
         <View className="mt-5">
@@ -80,7 +81,7 @@ export default function AccountInformasi() {
           />
         </View>
 
-        <View className="mt-3 ">
+        <View className="mt-3 mb-5 ">
           <Text className="text-xl font-medium">Rhesus</Text>
 
           <TextInput
@@ -89,8 +90,10 @@ export default function AccountInformasi() {
             className="mt-1 rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
         </View>
-      </SafeAreaView>
+
+        <WideButton className='mt-4' label="Save" />
     </ScrollView>
+      </SafeAreaView>
   );
 }
 
