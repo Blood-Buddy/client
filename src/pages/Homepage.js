@@ -1,5 +1,5 @@
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Feather, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import React from "react";
 import RequestCard from "../components/RequestCard";
 import WideButton from "../components/WideButton";
@@ -23,8 +23,8 @@ export default function Homepage() {
 
                     <View className="w-1/3">
                         <View className="flex-1 flex-row items-center">
-                            <Image className='ml-2 mt-2' source={require('../../assets/bloodIcon32.png')}></Image>
-                            <Text className="ml-2 mt-4 text-4xl font-bold">B</Text>
+                            <Ionicons name="water" size={32} color="#AE2111" />
+                            <Text className="ml-2 text-4xl font-bold">B</Text>
                         </View>
                     </View>
                 </View>
