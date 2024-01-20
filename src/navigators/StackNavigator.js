@@ -8,7 +8,7 @@ import DetailRewards from "../pages/DetailRewards";
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
-  return (
+  return ( 
     <Stack.Navigator initialRouteName="Profile">
       <Stack.Screen
         name="Home"
