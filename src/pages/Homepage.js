@@ -71,11 +71,7 @@ export default function Homepage({ navigation }) {
                     <Text className="font-bold text-2xl mb-2">Latest requests</Text>
                 </View>
 
-                <RequestCard />
-                <RequestCard />
-                <RequestCard />
-                <RequestCard />
-                <RequestCard />
+                <RequestCard navigation={navigation} />
             </ScrollView>
         </SafeAreaView>
     );
