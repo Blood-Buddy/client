@@ -1,6 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountInformasi from "../pages/AccountInformasi";
 import TabNavigator from "./TabNavigator";
+import DetailReward from "../pages/Rewards";
+import DetailRewards from "../pages/DetailRewards";
 
 const Stack = createStackNavigator();
 
@@ -16,8 +18,14 @@ export default function StackNavigator() {
       <Stack.Screen
         name="Account Information"
         component={AccountInformasi}
-        options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
+        options={{ headerShown: false }}
       />
+    <Stack.Screen
+        name="Detail Rewards"
+        component={DetailRewards}
+        options={{ headerShown: false }}
+      />
+
     </Stack.Navigator>
   );
 }
