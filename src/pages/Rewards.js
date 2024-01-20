@@ -5,15 +5,16 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 
-export default function Rewards() {
+export default function Rewards({navigation}) {
   return (
-    <SafeAreaView className="mx-5 px-5">
-      <ScrollView className="bg-[#F2F2F2] h-full">
+    <ScrollView className="bg-[#F2F2F2]">
+      <SafeAreaView className="mx-5 px-5">
         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
-          <Text className="font-bold text-2xl mb-2">Rewards</Text>
+          <Text className="font-bold text-2xl mb-2">Voucher</Text>
         </View>
 
         <View className="flex flex-row gap-8">
@@ -76,9 +77,14 @@ export default function Rewards() {
 
             <View className="flex justify-end items-end m-">
               <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <Text className="text-lg text-[#f2f2f2] text-center">
-                  Reedem
-                </Text>
+                <TouchableOpacity onPress={() => {
+                            navigation.removeListener;
+                            navigation.navigate("Detail Rewards");
+                        }}>
+                  <Text className="text-lg text-[#f2f2f2] text-center">
+                    Reedem
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -207,8 +213,8 @@ export default function Rewards() {
             </View>
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
