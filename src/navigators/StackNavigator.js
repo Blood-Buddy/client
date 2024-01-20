@@ -1,9 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountInformasi from "../pages/AccountInformasi";
 import TabNavigator from "./TabNavigator";
-import BookAppointment from "../pages/BookAppointment";
-import DetailRewards from "../pages/DetailRewards";
-import DetailReward from "../pages/Rewards";
+import DetailRewards from "../pages/Rewards";
+import History from "../pages/History";
 
 const Stack = createStackNavigator();
 
@@ -13,7 +12,7 @@ export default function StackNavigator() {
       <Stack.Screen
         name="Home"
         component={TabNavigator}
-        options={{ headerShown: false, title: 'Home' }}
+        options={{ headerShown: false, title: "Home" }}
       />
 
       <Stack.Screen
@@ -21,7 +20,7 @@ export default function StackNavigator() {
         component={AccountInformasi}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+        <Stack.Screen
         name="Book Appointment"
         component={BookAppointment}
         options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
@@ -29,6 +28,12 @@ export default function StackNavigator() {
     <Stack.Screen
         name="Detail Rewards"
         component={DetailRewards}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="History"
+        component={History}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
