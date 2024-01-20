@@ -1,6 +1,5 @@
 import { Feather } from "@expo/vector-icons";
 import {
-  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,

@@ -16,7 +16,7 @@ export default function StackNavigator() {
       <Stack.Screen
         name="Account Information"
         component={AccountInformasi}
-        options={{ headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -1,7 +1,6 @@
 import {
   Image,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -65,14 +64,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2f2f2",
     alignItems: "center",
     justifyContent: "center",
-    // marginTop: -50,
   },
   textOption: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10
   },
-  fontSize : {
+  fontSize: {
     fontSize: 15
   }
 });

@@ -13,8 +13,8 @@ export default function TabNavigator() {
             <Tab.Screen name="Homepage" component={Homepage} options={{
                 headerShown: false, title: 'Homepage',
                 tabBarIcon: ({ focused }) => {
-                    if(focused) {
-                    return <Ionicons name="home-sharp" size={24} color="#AE2111" />
+                    if (focused) {
+                        return <Ionicons name="home-sharp" size={24} color="#AE2111" />
                     } else {
                         return <Ionicons name="home-outline" size={24} color={'#AE2111'} />
                     }
@@ -23,8 +23,8 @@ export default function TabNavigator() {
             <Tab.Screen name="Appointment" component={Schedule} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
-                    if(focused) {
-                    return <Ionicons name="water" size={24} color="#AE2111" />
+                    if (focused) {
+                        return <Ionicons name="water" size={24} color="#AE2111" />
                     } else {
                         return <Ionicons name="water-outline" size={24} color={'#AE2111'} />
                     }
@@ -33,8 +33,8 @@ export default function TabNavigator() {
             <Tab.Screen name="Rewards" component={Rewards} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
-                    if(focused) {
-                    return <Ionicons name="gift" size={24} color="#AE2111" />
+                    if (focused) {
+                        return <Ionicons name="gift" size={24} color="#AE2111" />
                     } else {
                         return <Ionicons name="gift-outline" size={24} color={'#AE2111'} />
                     }
@@ -43,8 +43,8 @@ export default function TabNavigator() {
             <Tab.Screen name="Settings" component={Settings} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
-                    if(focused) {
-                    return <Ionicons name="settings" size={24} color="#AE2111" />
+                    if (focused) {
+                        return <Ionicons name="settings" size={24} color="#AE2111" />
                     } else {
                         return <Ionicons name="settings-outline" size={24} color={'#AE2111'} />
                     }
