@@ -11,7 +11,7 @@ import React from "react";
 export default function Rewards() {
   return (
     <SafeAreaView className="mx-5 px-5">
-      <ScrollView className="bg-[#F2F2F2]">
+      <ScrollView className="bg-[#F2F2F2] h-full">
         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
           <Text className="font-bold text-2xl mb-2">Rewards</Text>
         </View>

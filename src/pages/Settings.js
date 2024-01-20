@@ -11,8 +11,8 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Setting({ navigation }) {
   return (
-    <ScrollView className="bg-[#F2F2F2]">
-      <SafeAreaView className="mx-5 px-5">
+    <SafeAreaView className="mx-5 px-5">
+      <ScrollView className="bg-[#F2F2F2] h-full">
         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
           <Text className="font-bold text-2xl mb-2">Setting</Text>
         </View>
@@ -52,8 +52,8 @@ export default function Setting({ navigation }) {
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
