@@ -9,9 +9,9 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
     return (
-        <Tab.Navigator screenOptions={{ tabBarInactiveTintColor: "grey", tabBarActiveTintColor: '#AE2111', }}>
+        <Tab.Navigator initialRouteName="Homepage" screenOptions={{ tabBarInactiveTintColor: "grey", tabBarActiveTintColor: '#AE2111', }}>
             <Tab.Screen name="Homepage" component={Homepage} options={{
-                headerShown: false,
+                headerShown: false, title: 'Homepage',
                 tabBarIcon: ({ focused }) => {
                     if(focused) {
                     return <Ionicons name="home-sharp" size={24} color="#AE2111" />
