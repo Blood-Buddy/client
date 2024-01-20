@@ -8,15 +8,15 @@ export default function StackNavigator() {
   return (
     <Stack.Navigator initialRouteName="Profile">
       <Stack.Screen
-        name="Profile"
+        name="Home"
         component={TabNavigator}
-        options={{ headerShown: false, title: 'Profile' }}
+        options={{ headerShown: false, title: 'Home' }}
       />
 
       <Stack.Screen
         name="Account Information"
         component={AccountInformasi}
-        options={{ headerShown: false }}
+        options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
       />
     </Stack.Navigator>
   );
