@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import WideButton from "../components/WideButton";
 
 export default function DetailRewards() {
   return (
@@ -29,10 +30,10 @@ export default function DetailRewards() {
           </View>
         </View>
 
-        <View className="flex flex-row bg-red-300">
+        <View className="flex flex-row ">
           {/* total point */}
-          <View className="bg-orange-800">
-            <View style={styles.pointsContainer} className="ml-5 bg-green-400">
+          <View className="">
+            <View style={styles.pointsContainer} className="ml-5 ">
               <Image
                 source={require("../../assets/detailReward.png")}
                 style={styles.imgVoucher}
@@ -42,7 +43,29 @@ export default function DetailRewards() {
           </View>
         </View>
 
-        
+        <View className="ml-4">
+          <Text className="text-xl text-[#7f7f7f]">
+            {" "}
+            10% Shopping Discount{" "}
+          </Text>
+          <View className="flex flex-row">
+            <Text className="text-base text-[#7f7f7f]"> from </Text>
+            <Text className="text-base text-red-700">Indomaret </Text>
+          </View>
+        </View>
+
+        <View className="ml-4 mt-5">
+          <Text className="text-lg text-justify">
+            Get a 10% shopping discount worth a maximum of IDR 50,000 for every
+            purchase. e-Vouchers can be accessed on the "My Vouchers" page with
+            applicable terms and conditions. This program is sponsored by
+            Indomaret.
+          </Text>
+        </View>
+
+        <View className="mt-52">
+          <WideButton className="mt-4" label="Reedem" />
+        </View>
       </SafeAreaView>
     </ScrollView>
   );
@@ -54,10 +77,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   imgVoucher: {
-    marginLeft: -30,
+    marginLeft: -50,
     width: 90,
     height: 90,
-    backgroundColor: "green"
+    // backgroundColor: "green"
   },
   pointsContainer: {
     flexDirection: "row",
