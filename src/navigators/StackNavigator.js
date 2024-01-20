@@ -1,8 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountInformasi from "../pages/AccountInformasi";
 import TabNavigator from "./TabNavigator";
-import DetailRewards from "../pages/Rewards";
 import History from "../pages/History";
+import BookAppointment from "../pages/BookAppointment";
+import DetailRewards from "../pages/DetailRewards";
 
 const Stack = createStackNavigator();
 
