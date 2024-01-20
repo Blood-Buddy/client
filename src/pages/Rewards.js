@@ -10,10 +10,10 @@ import React from "react";
 
 export default function Rewards() {
   return (
-    <ScrollView className="bg-[#F2F2F2]">
-      <SafeAreaView className="mx-5 px-5">
+    <SafeAreaView className="mx-5 px-5">
+      <ScrollView className="bg-[#F2F2F2]">
         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
-          <Text className="font-bold text-2xl mb-2">Voucher</Text>
+          <Text className="font-bold text-2xl mb-2">Rewards</Text>
         </View>
 
         <View className="flex flex-row gap-8">
@@ -207,8 +207,8 @@ export default function Rewards() {
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
