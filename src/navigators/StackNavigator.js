@@ -4,11 +4,12 @@ import TabNavigator from "./TabNavigator";
 import History from "../pages/History";
 import BookAppointment from "../pages/BookAppointment";
 import DetailRewards from "../pages/DetailRewards";
+import VoucherConfirmation from "../modals/VoucherConfirmation";
 
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
-  return ( 
+  return (
     <Stack.Navigator initialRouteName="Profile">
       <Stack.Screen
         name="Home"
@@ -21,12 +22,15 @@ export default function StackNavigator() {
         component={AccountInformasi}
         options={{ headerShown: false }}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="Book Appointment"
         component={BookAppointment}
-        options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
+        options={{
+          headerStyle: { backgroundColor: "#F2F2F2" },
+          headerBackTitleVisible: false,
+        }}
       />
-    <Stack.Screen
+      <Stack.Screen
         name="Detail Rewards"
         component={DetailRewards}
         options={{ headerShown: false }}
@@ -36,6 +40,12 @@ export default function StackNavigator() {
         name="History"
         component={History}
         options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Voucher Confirmation"
+        component={VoucherConfirmation}
+        options={{ presentation: "modal", headerShown: false }}
       />
     </Stack.Navigator>
   );
