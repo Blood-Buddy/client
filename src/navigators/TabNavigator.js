@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
 import Homepage from "../pages/Homepage";
-import Schedule from "../pages/Schedule";
+import Appointment from "../pages/Appointment";
 import Rewards from "../pages/Rewards";
 import Settings from "../pages/Settings";
 
@@ -20,7 +20,7 @@ export default function TabNavigator() {
                     }
                 }
             }} />
-            <Tab.Screen name="Appointment" component={Schedule} options={{
+            <Tab.Screen name="Appointment" component={Appointment} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     if (focused) {

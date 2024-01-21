@@ -2,6 +2,7 @@ import { Modal, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import React, { useState } from 'react';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { SelectList } from 'react-native-dropdown-select-list'
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function BookAppointment({ navigation }) {
     const [selected, setSelected] = useState('');
@@ -82,14 +83,22 @@ export default function BookAppointment({ navigation }) {
             </View>
 
             <Modal animationType="fade" transparent={false} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
-                <SafeAreaView>
-                    <View className='items-center justify-center opacity-100'>
+                <SafeAreaView className='items-center justify-center'>
+                    <View className='items-center justify-center h-full'>
                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                            <Text className="text-red-700 font-bold text-3xl">Attention!</Text>
+                            <MaterialIcons name="thumb-up-off-alt" size={48} color="#AE2111" />
                         </TouchableOpacity>
+                        <Text className='text-4xl'>Thank You!</Text>
+                        <Text className='text-center mt-2'>You have successfully created an appointment. You can always access and edit your appointment in Appointment page.</Text>
+                        <Text className='text-center text-[#2e2e2e]/50 mt-2'>Please show the QR code below to the Rumah Sakit Pondok Indah staff.</Text>
+                        <View className='mt-2 w-full'>
+                            <TouchableOpacity onPress={() => navigation.navigate('Appointment')} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
+                                <Text className="text-[#f2f2f2] font-bold text-xl">Done</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
-                    
+
                 </SafeAreaView>
             </Modal>
 

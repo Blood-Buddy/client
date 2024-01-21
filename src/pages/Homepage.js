@@ -18,7 +18,7 @@ av.addListener(() => {
 export default function Homepage({ navigation }) {
     return (
         <SafeAreaView className="bg-[#F2F2F2]">
-            <ScrollView className="px-5">
+            <ScrollView className="px-5 h-full">
                 <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
                     <Text className="font-bold text-2xl mb-2">Profile</Text>
                     <TouchableOpacity
