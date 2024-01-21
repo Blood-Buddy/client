@@ -8,7 +8,7 @@ import DetailRewards from "../pages/DetailRewards";
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
-  return ( 
+  return (
     <Stack.Navigator initialRouteName="Profile">
       <Stack.Screen
         name="Home"
@@ -20,17 +20,16 @@ export default function StackNavigator() {
         component={AccountInformasi}
         options={{ headerShown: false }}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="Book Appointment"
         component={BookAppointment}
         options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
       />
-    <Stack.Screen
+      <Stack.Screen
         name="Detail Rewards"
         component={DetailRewards}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="History"
         component={History}
