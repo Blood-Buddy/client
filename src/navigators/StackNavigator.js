@@ -15,7 +15,6 @@ export default function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false, title: "Home" }}
       />
-
       <Stack.Screen
         name="Account Information"
         component={AccountInformasi}
