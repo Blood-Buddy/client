@@ -14,7 +14,6 @@ export default function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false, title: 'Home' }}
       />
-
       <Stack.Screen
         name="Account Information"
         component={AccountInformasi}
@@ -25,22 +24,10 @@ export default function StackNavigator() {
         component={BookAppointment}
         options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
       />
-
-      <Stack.Screen
-        name="Book Appointment"
-        component={BookAppointment}
-        options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
-      />
     <Stack.Screen
         name="Detail Rewards"
         component={DetailRewards}
         options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="Book Appointment"
-        component={BookAppointment}
-        options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
       />
     </Stack.Navigator>
   );
