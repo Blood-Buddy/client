@@ -60,7 +60,7 @@ export default function Homepage({ navigation }) {
         </View>
 
         {user.map((item) => (
-          <View key={item.id}>
+          <View key={item._id}>
             <View className="flex-1 flex-row">
               <View className="mt-2 w-2/3 border-r-2 border-r-red-700">
                 <Text className="font-bold text-lg">{item.name}</Text>
