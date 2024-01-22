@@ -14,7 +14,7 @@ import { LoginContext } from "../context/LoginContext";
 import * as SecureStore from 'expo-secure-store';
 
 async function save(key, value) {
-    await SecureStore.setItemAsync(key, value);
+  await SecureStore.setItemAsync(key, value);
 }
 
 
@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
       const accessToken = response.data.access_token;
       setIsLoggedIn(accessToken)
       await save('accessToken', accessToken);
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +85,10 @@ export default function Login({ navigation }) {
 
             <View className="mt-2" style={styles.textOption}>
               <Text className="text-s text-gray-500 ">Forgot Password? </Text>
-              <Text className="text-s text-red-700 ">Sign Up </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Register")}>
+                <Text className="text-s text-red-700 ">Sign Up </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>
