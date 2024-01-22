@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 
-export default function Rewards({navigation}) {
+export default function Rewards({ navigation }) {
   return (
     <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">
@@ -35,7 +35,11 @@ export default function Rewards({navigation}) {
 
           {/* card cek disini */}
           <View className="">
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                navigation.removeListener;
+                navigation.navigate("My Voucher");
+              }}
               className="bg-red-700 p-3 rounded-lg mt-4"
               style={styles.cardVoc}
             >
@@ -50,7 +54,7 @@ export default function Rewards({navigation}) {
                   </Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -77,10 +81,12 @@ export default function Rewards({navigation}) {
 
             <View className="flex justify-end items-end m-">
               <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <TouchableOpacity onPress={() => {
-                            navigation.removeListener;
-                            navigation.navigate("Detail Rewards");
-                        }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.removeListener;
+                    navigation.navigate("Detail Rewards");
+                  }}
+                >
                   <Text className="text-lg text-[#f2f2f2] text-center">
                     Reedem
                   </Text>
