@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import * as SecureStore from 'expo-secure-store';
 export default function Appointment() {
-    const hasData = true;
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [appointments, setAppointments] = useState([]);
 

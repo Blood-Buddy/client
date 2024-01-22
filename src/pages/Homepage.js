@@ -20,6 +20,7 @@ av.addListener(() => {
 export default function Homepage({ navigation }) {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [user, setUser] = useState([]);
+    const [requests, setRequests] = useState([]);
 
     const fetchUser = async () => {
         const token = await SecureStore.getItemAsync('accessToken');
@@ -36,8 +37,23 @@ export default function Homepage({ navigation }) {
         }
     };
 
+    const fetchRequests = async () => {
+        const token = await SecureStore.getItemAsync('accessToken');
+        try {
+            const response = await Axios.get(`${apiUrl}request`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setRequests(response.data);
+        } catch (error) {
+            console.log(error, "fetch requests error");
+        }
+    }
+
     useEffect(() => {
         fetchUser();
+        fetchRequests();
     }, []);
 
     return (
@@ -112,7 +128,7 @@ export default function Homepage({ navigation }) {
                     <Text className="font-bold text-2xl mb-2">Latest requests</Text>
                 </View>
 
-                <RequestCard navigation={navigation} />
+                <RequestCard data={requests} navigation={navigation} />
             </ScrollView>
         </SafeAreaView>
     );
