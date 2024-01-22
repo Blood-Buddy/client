@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
+import Axios from "axios";
 
 export default function Register({ navigation }) {
   const [bloodType, setbloodType] = useState("");
@@ -20,7 +21,7 @@ export default function Register({ navigation }) {
   const [nik, setNik] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  
+
 
   const provinceData = [
     {
@@ -170,6 +171,24 @@ export default function Register({ navigation }) {
 
   // console.log(bloodType);
   // console.log(province);
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+  const handleSubmit = async () => {
+    try {
+      const response = await Axios.post(`${apiUrl}user/register`, {
+        email,
+        password,
+        name,
+        nik,
+        phone,
+        address,
+        province,
+        bloodType
+      })
+      navigation.navigate("Login")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior="padding">
@@ -184,6 +203,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>Email</Text>
 
               <TextInput
+                required
+                onChangeText={setEmail}
+                value={email}
                 placeholder="Email"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -193,6 +215,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>Password </Text>
 
               <TextInput
+                required
+                onChangeText={setPassword}
+                value={password}
                 placeholder="Password"
                 secureTextEntry
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -202,6 +227,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>Full Name </Text>
 
               <TextInput
+                required
+                onChangeText={setName}
+                value={name}
                 placeholder="Full name"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -211,6 +239,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>NIK</Text>
 
               <TextInput
+                required
+                onChangeText={setNik}
+                value={nik}
                 placeholder="NIK"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -220,6 +251,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>Phone</Text>
 
               <TextInput
+                required
+                onChangeText={setPhone}
+                value={phone}
                 placeholder="Phone"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -229,6 +263,9 @@ export default function Register({ navigation }) {
               <Text style={styles.fontSize}>Address</Text>
 
               <TextInput
+                required
+                onChangeText={setAddress}
+                value={address}
                 placeholder="Address"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -268,7 +305,7 @@ export default function Register({ navigation }) {
             </View>
 
             <View className="mt-4">
-              <TouchableOpacity className="hover:shadow-form rounded-md bg-red-700 py-3 px-8 mx-4 outline-none flex items-center justify-center">
+              <TouchableOpacity onPress={handleSubmit} className="hover:shadow-form rounded-md bg-red-700 py-3 px-8 mx-4 outline-none flex items-center justify-center">
                 <Text className="text-lg font-bold text-white">Sign Up</Text>
               </TouchableOpacity>
             </View>
