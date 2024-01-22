@@ -6,10 +6,28 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from "@react-navigation/native";
+import { LoginContext } from "../context/LoginContext";
 
-export default function Setting({ navigation }) {
+
+export default function Setting() {
+  const navigation = useNavigation();
+  const {setIsLoggedIn, isLoggedIn} = useContext(LoginContext);
+
+  const handleLogout = async () => {
+    try {
+      await SecureStore.deleteItemAsync("accessToken");
+      setIsLoggedIn(null)
+
+      // console.log(isLoggedIn, "token");
+      // navigation.navigate("Homepage");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <SafeAreaView className="mx-5 px-5">
       <ScrollView className="bg-[#F2F2F2] h-full">
@@ -38,20 +56,18 @@ export default function Setting({ navigation }) {
         </View>
 
         {/* Sign Out */}
-        <View className="">
-          <View style={styles.card} className="flex flex-row">
-            <View className="mr-3">
-              <TouchableOpacity>
+        <TouchableOpacity onPress={handleLogout}>
+          <View className="">
+            <View style={styles.card} className="flex flex-row">
+              <View className="mr-3">
                 <AntDesign name="logout" size={23} color="black" />
-              </TouchableOpacity>
-            </View>
-            <View className="">
-              <TouchableOpacity>
+              </View>
+              <View className="">
                 <Text className="text-lg font-medium"> Sign Out</Text>
-              </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

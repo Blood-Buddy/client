@@ -16,7 +16,7 @@ export function AuthComponent({ children }) {
         getValueFor('accessToken').then((data) => {
             setIsLoggedIn(data);
         });
-    }, []);
+    }, [isLoggedIn]);
 
     return (
         <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
