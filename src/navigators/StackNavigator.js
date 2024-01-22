@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
-console.log(process.env)
+// console.log(process.env)
 
 const Stack = createStackNavigator();
 

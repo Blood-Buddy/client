@@ -1,8 +1,31 @@
+import Axios from "axios";
+import { useEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import * as SecureStore from 'expo-secure-store';
 export default function Appointment() {
     const hasData = true;
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+    const [appointments, setAppointments] = useState([]);
 
-    if (hasData) {
+    const fetchAppointments = async () => {
+        try {
+            const token = await SecureStore.getItemAsync('accessToken');
+            const response = await Axios.get(`${apiUrl}appointment`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setAppointments(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchAppointments();
+    }, []);
+
+    if (appointments.length !== 0) {
         return (
             <SafeAreaView>
                 <View className='border-b-2 border-red-700 mx-3'>
