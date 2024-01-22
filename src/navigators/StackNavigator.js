@@ -6,6 +6,7 @@ import BookAppointment from "../pages/BookAppointment";
 import DetailRewards from "../pages/DetailRewards";
 import VoucherConfirmation from "../modals/VoucherConfirmation";
 import MyVoucher from "../pages/MyVoucher";
+import VoucherUseConfirmation from "../pages/VoucherUseConfirmation";
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,12 @@ export default function StackNavigator() {
         name="My Voucher"
         component={MyVoucher}
         options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Voucher Use Confirmation"
+        component={VoucherUseConfirmation}
+        options={{ presentation: "modal", headerShown: false }}
       />
     </Stack.Navigator>
   );

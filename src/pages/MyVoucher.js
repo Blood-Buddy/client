@@ -42,7 +42,12 @@ export default function MyVoucher({ navigation }) {
 
               <View className="flex justify-end items-end mr-2">
                 <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.removeListener;
+                      navigation.navigate("Voucher Use Confirmation");
+                    }}
+                  >
                     <Text className="text-lg text-[#f2f2f2] text-center">
                       Use Voucher
                     </Text>
@@ -52,8 +57,8 @@ export default function MyVoucher({ navigation }) {
             </View>
           </View>
 
-           {/* card voucher */}
-           <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row mx-1 mb-1">
+          {/* card voucher */}
+          <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row mx-1 mb-1">
             <View className="flex justify-center items-center bg">
               <Image
                 source={require("../../assets/ice1.png")}
