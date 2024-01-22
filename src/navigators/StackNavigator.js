@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 
 export default function StackNavigator() {
   const { isLoggedIn } = useContext(LoginContext);
-  const {setIsLoggedIn} = useContext(LoginContext);
   // setIsLoggedIn(false)
   // console.log(isLoggedIn, "isLoggedIn");
 
@@ -51,7 +50,7 @@ export default function StackNavigator() {
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{ title: "Register" }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>
