@@ -60,15 +60,17 @@ export default function BookAppointment({ navigation, route }) {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            
-            navigation.navigate("Appointment");
+            console.log(response);
+            // if(response) {
+            //     setModalVisible(true)
+            // }
+            // navigation.navigate("Appointment");
         } catch (error) {
             console.log(error);
         }
     }
     return (
         <>
-
             <Calendar
                 onDayPress={day => {
                     setDate(day.dateString);
@@ -101,7 +103,7 @@ export default function BookAppointment({ navigation, route }) {
                         search={false}
                     />
                 </View>
-                <TouchableOpacity onPress={() => setModalVisible(true)} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
+                <TouchableOpacity onPress={postAppointment} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
                     <Text className="text-[#f2f2f2] font-bold text-xl">Book Appointment</Text>
                 </TouchableOpacity>
             </View>
@@ -116,16 +118,14 @@ export default function BookAppointment({ navigation, route }) {
                         <Text className='text-center mt-2'>You have successfully created an appointment. You can always access and edit your appointment in Appointment page.</Text>
                         <Text className='text-center text-[#2e2e2e]/50 mt-2'>Please show the QR code below to the Rumah Sakit Pondok Indah staff.</Text>
                         <View className='mt-2 w-full'>
-                            <TouchableOpacity onPress={postAppointment} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
+                            <TouchableOpacity onPress={() => navigation.navigate("Appointment")} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
                                 <Text className="text-[#f2f2f2] font-bold text-xl">Done</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
 
-
                 </SafeAreaView>
             </Modal>
-
         </>
 
     )
