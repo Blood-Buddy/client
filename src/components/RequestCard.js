@@ -6,6 +6,7 @@ export default function RequestCard({ data, navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
+    // console.log(data, 'data request card');
     return (
         data.map((item) => (
             <View key={item._id} className="mt-4 bg-white rounded-lg shadow-md">
@@ -56,7 +57,7 @@ export default function RequestCard({ data, navigation }) {
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                     navigation.removeListener;
-                                    navigation.navigate("Book Appointment", { HospitalId: item.hospitalId });
+                                    navigation.navigate("Book Appointment", { hospitalId: item.hospitalId, requestId: item._id });
                                 }}
                                 className="mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
                                 <Text className="text-[#f2f2f2] font-bold text-xl">Continue</Text>

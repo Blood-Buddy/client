@@ -56,6 +56,7 @@ export default function Homepage({ navigation }) {
         fetchRequests();
     }, []);
 
+    // console.log(requests, "requests");
     return (
         <SafeAreaView className="bg-[#F2F2F2]">
             <ScrollView className="px-5 h-full">
