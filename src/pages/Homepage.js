@@ -45,11 +45,15 @@ export default function Homepage({ navigation }) {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setRequests(response.data);
+            if(response) {
+                setRequests(response.data);
+            }
+            
         } catch (error) {
-            console.log(error, "fetch requests error");
+            console.log(JSON.stringify(error), "fetch requests error");
         }
     }
+    // console.log(requests, 'fetch request');
 
     useEffect(() => {
         fetchUser();

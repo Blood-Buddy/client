@@ -6,19 +6,20 @@ export default function RequestCard({ data, navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
+
     // console.log(data, 'data request card');
     return (
-        data.map((item) => (
-            <View key={item._id} className="mt-4 bg-white rounded-lg shadow-md">
+        data?.map((item) => (
+            <View key={item?._id} className="mt-4 bg-white rounded-lg shadow-md">
                 <View className='bg-red-700 rounded-t-lg px-6 py-1 justify-center'>
 
                     <Text className='text-white text-2xl font-bold'>Rumah Sakit Pondok Indah</Text>
                 </View>
-                <Text className='mt-2 mx-6 '>{item.description}</Text>
-                    <Text className='mt-2 mx-6 '>Blood type A needed: {item.bloodType.A.request}, collected: {item.bloodType.A.collected}</Text>
-                    <Text className='mt-2 mx-6 '>Blood type B needed: {item.bloodType.B.request}, collected: {item.bloodType.B.collected}</Text>
-                    <Text className='mt-2 mx-6 '>Blood type AB needed: {item.bloodType.AB.request}, collected: {item.bloodType.AB.collected}</Text>
-                    <Text className='mt-2 mx-6 '>Blood type O needed: {item.bloodType.O.request}, collected: {item.bloodType.O.collected}</Text>
+                <Text className='mt-2 mx-6 '>{item?.description}</Text>
+                    <Text className='mt-2 mx-6 '>Blood type A needed: {item?.bloodType?.A?.request}, collected: {item?.bloodType?.A?.collected}</Text>
+                    <Text className='mt-2 mx-6 '>Blood type B needed: {item?.bloodType?.B?.request}, collected: {item?.bloodType?.B?.collected}</Text>
+                    <Text className='mt-2 mx-6 '>Blood type AB needed: {item?.bloodType?.AB?.request}, collected: {item?.bloodType?.AB?.collected}</Text>
+                    <Text className='mt-2 mx-6 '>Blood type O needed: {item?.bloodType?.O?.request}, collected: {item?.bloodType?.O?.collected}</Text>
 
                 <View className="flex-row-reverse">
                     <TouchableOpacity onPress={() => setModalVisible(true)} className="my-4 mx-6 bg-red-700 py-2 rounded-lg w-36 items-center justify-center">
@@ -57,7 +58,7 @@ export default function RequestCard({ data, navigation }) {
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                     navigation.removeListener;
-                                    navigation.navigate("Book Appointment", { hospitalId: item.hospitalId, requestId: item._id });
+                                    navigation.navigate("Book Appointment", { requestData: item });
                                 }}
                                 className="mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
                                 <Text className="text-[#f2f2f2] font-bold text-xl">Continue</Text>
