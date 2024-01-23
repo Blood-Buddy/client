@@ -8,45 +8,53 @@ import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
+import HomepageHospital from "../pages/hospital/HomepageHospital";
 // console.log(process.env)
 
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
-  const { isLoggedIn } = useContext(LoginContext);
-  // setIsLoggedIn(false)
-  // console.log(isLoggedIn, "isLoggedIn");
+  const { isLoggedIn, role } = useContext(LoginContext);
+  // console.log(isLoggedIn, role, "<<<<<<from navigator");
 
   return (
     <Stack.Navigator>
       {isLoggedIn ? (
-        <>
+        role === "hospital" ? (
           <Stack.Screen
-            name="Home"
-            component={TabNavigator}
-            options={{ headerShown: false, title: "Home" }}
+            name="Homepage Hospital"
+            component={HomepageHospital}
+            options={{ headerShown: false, title: "Homepage" }}
           />
-          <Stack.Screen
-            name="Account Information"
-            component={AccountInformasi}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Book Appointment"
-            component={BookAppointment}
-            options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
-          />
-          <Stack.Screen
-            name="Detail Rewards"
-            component={DetailRewards}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="History"
-            component={History}
-            options={{ headerShown: false }}
-          />
-        </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={TabNavigator}
+              options={{ headerShown: false, title: "Home" }}
+            />
+            <Stack.Screen
+              name="Account Information"
+              component={AccountInformasi}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Book Appointment"
+              component={BookAppointment}
+              options={{ headerStyle: { backgroundColor: "#F2F2F2" }, headerBackTitleVisible: false }}
+            />
+            <Stack.Screen
+              name="Detail Rewards"
+              component={DetailRewards}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="History"
+              component={History}
+              options={{ headerShown: false }}
+            />
+          </>
+        )
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -56,3 +64,4 @@ export default function StackNavigator() {
     </Stack.Navigator>
   );
 }
+

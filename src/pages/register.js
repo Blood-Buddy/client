@@ -13,7 +13,7 @@ import { SelectList } from "react-native-dropdown-select-list";
 import Axios from "axios";
 
 export default function Register({ navigation }) {
-  const [bloodType, setbloodType] = useState("");
+  const [bloodType, setBloodType] = useState("");
   const [province, setProvince] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -293,7 +293,7 @@ export default function Register({ navigation }) {
 
             <View className="mt-1 mx-4">
               <SelectList
-                setSelected={(val) => setbloodType(val)}
+                setSelected={(val) => setBloodType(val)}
                 data={bloodTypeData}
                 save="value"
                 placeholder="Select blood type"

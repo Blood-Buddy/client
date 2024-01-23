@@ -107,7 +107,15 @@ export default function Homepage({ navigation }) {
                                 <Text className="font-bold text-sm text-red-700">
                                     Total Donor
                                 </Text>
-                                <Text className="text-md">{item?.appointment ? item?.appointment?.length : 0} times</Text>
+                                <Text className="text-md">
+                                    {item?.appointment[0]?.status === 'completed' ?
+                                        item?.appointment.length > 1 ?
+                                            `${item?.appointment.length} times` :
+                                            '1 time'
+                                        : '-'
+                                    }
+                                </Text>
+
                             </View>
                             <View className="mt-2 px-2 w-1/3 border-r-2 border-r-red-700">
                                 <Text className="font-bold text-sm text-red-700">

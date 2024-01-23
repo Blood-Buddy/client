@@ -24,15 +24,20 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState('');
   // console.log(email, password, "input");
 
-  const { setIsLoggedIn } = useContext(LoginContext)
+  const { setIsLoggedIn, setRole } = useContext(LoginContext)
 
   const handleSubmit = async () => {
     try {
       // console.log(apiUrl);
       const response = await Axios.post(`${apiUrl}user/login`, { email, password });
+      // console.log(response.data, "<<<<<<from login page");
       const accessToken = response.data.access_token;
-      setIsLoggedIn(accessToken)
+      const role = response.data.role;
+
+      setIsLoggedIn(accessToken);
+      setRole(role);
       await save('accessToken', accessToken);
+      await save('role', role);
 
     } catch (error) {
       console.log(error);
