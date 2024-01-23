@@ -8,8 +8,8 @@ import Axios from "axios";
 
 export default function BookAppointment({ navigation, route }) {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-    const HospitalId = route.params
-    // console.log(HospitalId, "hospital id");
+    const {hospitalId, requestId} = route.params
+    // console.log(hospitalId, requestId);
     const [date, setDate] = useState('');
     const [session, setSession] = useState(1);
     const [modalVisible, setModalVisible] = useState(false);
@@ -52,7 +52,8 @@ export default function BookAppointment({ navigation, route }) {
         const token = await SecureStore.getItemAsync('accessToken');
         try {
             const response = await Axios.post(`${apiUrl}appointment`, {
-                hospitalId: HospitalId,
+                hospitalId,
+                requestId,
                 date,
                 session,
             }, {
@@ -60,11 +61,11 @@ export default function BookAppointment({ navigation, route }) {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            console.log(response);
-            // if(response) {
-            //     setModalVisible(true)
-            // }
-            // navigation.navigate("Appointment");
+            // console.log(response);
+            if(response) {
+                setModalVisible(true)
+            }
+            navigation.navigate("Appointment");
         } catch (error) {
             console.log(error);
         }
