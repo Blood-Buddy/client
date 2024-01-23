@@ -14,11 +14,7 @@ import Axios from "axios";
 export default function Rewards({ navigation, route }) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [reward, setReward] = useState([]);
-
-  // const voucherId = route.params;
-  // const [voucherId, setVoucherId] = useState(route.params);
-  console.log(route.params, ">>koko");
-  console.log(voucherId, ">>> voucherId");
+  const [voucherId, setVoucherId] = useState(route.params);
 
   const fetchReward = async () => {
     let token = await SecureStore.getItemAsync("accessToken");
@@ -34,30 +30,30 @@ export default function Rewards({ navigation, route }) {
     }
   };
 
-  console.log(reward, "<<<< from fetch reward");
-  // const handleUseVoucher = async () => {
-  //   let token = await SecureStore.getItemAsync("accessToken");
-  //   try {
-  //     console.log("masuk use voucher");
+  // console.log(reward, "<<<< from fetch reward");
 
-  //     const response = await Axios.post(
-  //       `${apiUrl}vouchers/claim/${voucherId}`,
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
+  const handleUseVoucher = async (i) => {
+    let token = await SecureStore.getItemAsync("accessToken");
+    try {
+      // console.log(i,"masuk use voucher");
 
-  //     console.log(response.data, ">>> handle use voucher");
+      const response = await Axios.post(
+        `${apiUrl}vouchers/claim/${i}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  //     setVoucherId(voucherId);
-  //     navigation.navigate("Voucher Use Confirmation", { voucherId: voucherId });
-  //   } catch (error) {
-  //     console.log(error, "useVoucher di reward");
-  //   }
-  // };
+      // console.log(response, ">>> handle use voucher");
+      setVoucherId(voucherId);
+      navigation.navigate("My Voucher", { voucherId: voucherId });
+    } catch (error) {
+      console.log(error, "useVoucher di reward");
+    }
+  };
 
   useEffect(() => {
     fetchReward();
@@ -136,9 +132,7 @@ export default function Rewards({ navigation, route }) {
                 <View className="flex justify-end items-end m-">
                   <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
                     <TouchableOpacity
-                      onPress={navigation.navigate("My Voucher", {
-                        voucherData: item,
-                      })}
+                      onPress={() => handleUseVoucher(item._id)}
                     >
                       <Text className="text-lg text-[#f2f2f2] text-center">
                         Use Voucher
