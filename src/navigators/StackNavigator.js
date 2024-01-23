@@ -8,13 +8,12 @@ import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
-console.log(process.env)
+// console.log(process.env)
 
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
   const { isLoggedIn } = useContext(LoginContext);
-  const {setIsLoggedIn} = useContext(LoginContext);
   // setIsLoggedIn(false)
   // console.log(isLoggedIn, "isLoggedIn");
 
@@ -51,7 +50,7 @@ export default function StackNavigator() {
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{ title: "Register" }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>
