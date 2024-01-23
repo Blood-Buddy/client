@@ -11,7 +11,8 @@ import RequestCard from "../components/RequestCard";
 import WideButton from "../components/WideButton";
 import { Animated } from "react-native";
 import Axios from "axios";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
+import { useIsFocused } from "@react-navigation/native";
 
 const av = new Animated.Value(0);
 av.addListener(() => {
@@ -20,29 +21,32 @@ av.addListener(() => {
 
 export default function Homepage({ navigation }) {
   // console.log(token);
+
+  const isFocused = useIsFocused();
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  const [user, setUser] = useState([]);
-  const fetchUser = async () => {
-    let token = await SecureStore.getItemAsync('accessToken')
-    // console.log(token, "tokennnnn");
+  const [user, setUser] = useState([])
+
+  async function fetchUser() {
+    let token = await SecureStore.getItemAsync("accessToken");
     try {
       const response = await Axios.get(`${apiUrl}user`, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      // console.log(response.data, "data user");
+      console.log(response.data, "homepage");
       setUser(response.data);
     } catch (error) {
       console.log(error, "homepage");
-      // throw error
     }
-  };
+  }
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (isFocused) {
+      fetchUser();
+    }
+  }, [isFocused]);
 
   return (
     <SafeAreaView className="bg-[#F2F2F2]">
