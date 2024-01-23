@@ -108,7 +108,7 @@ export default function Rewards({ navigation }) {
                       }}
                     >
                       <Text className="text-lg text-[#f2f2f2] text-center">
-                        Reedem
+                        Use Voucher
                       </Text>
                     </TouchableOpacity>
                   </View>
