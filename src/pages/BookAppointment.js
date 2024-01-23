@@ -5,6 +5,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import { MaterialIcons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 import Axios from "axios";
+import dateFormatter from "../helpers/dateFormatter";
 
 export default function BookAppointment({ navigation, route }) {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -17,33 +18,6 @@ export default function BookAppointment({ navigation, route }) {
         { key: 1, value: "Session 1: 06.00 - 11.30" },
         { key: 2, value: "Session 2: 13.30 - 18.00" },
     ]
-
-    function formatDate(inputDate) {
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        const dateParts = inputDate.split("-");
-        const year = dateParts[0];
-        const monthIndex = parseInt(dateParts[1]) - 1;
-        const day = dateParts[2];
-
-        const monthName = months[monthIndex];
-
-        let dayWithSuffix;
-        if (day.endsWith("1") && day !== "11") {
-            dayWithSuffix = day + "st";
-        } else if (day.endsWith("2") && day !== "12") {
-            dayWithSuffix = day + "nd";
-        } else if (day.endsWith("3") && day !== "13") {
-            dayWithSuffix = day + "rd";
-        } else {
-            dayWithSuffix = day + "th";
-        }
-
-        return `${monthName} ${dayWithSuffix}, ${year}`;
-    }
     
     const postAppointment = async () => {
         const token = await SecureStore.getItemAsync('accessToken');
@@ -89,7 +63,7 @@ export default function BookAppointment({ navigation, route }) {
                 <Text className="text-red-700 text-2xl font-bold">{requestData?.hospital[0]?.name}</Text>
                 <Text className='mt-2'>Address: {requestData?.hospital[0]?.address}</Text>
                 <Text className='mt-2'>Phone Number: {requestData?.hospital[0]?.phoneNumber}</Text>
-                {date ? <Text className='mt-2'>Selected Date: {formatDate(date)}</Text> : null}
+                {date ? <Text className='mt-2'>Selected Date: {dateFormatter(date)}</Text> : null}
                 <View className='mt-2'>
                     <SelectList
                         setSelected={(val) => setSession(val)}
