@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
+import MyVoucher from "../pages/MyVoucher";
 // console.log(process.env)
 
 const Stack = createStackNavigator();
@@ -34,7 +35,10 @@ export default function StackNavigator() {
           <Stack.Screen
             name="Book Appointment"
             component={BookAppointment}
-            options={{ headerStyle: { backgroundColor: "#F2F2F2", }, headerBackTitleVisible: false }}
+            options={{
+              headerStyle: { backgroundColor: "#F2F2F2" },
+              headerBackTitleVisible: false,
+            }}
           />
           <Stack.Screen
             name="Detail Rewards"
@@ -46,11 +50,25 @@ export default function StackNavigator() {
             component={History}
             options={{ headerShown: false }}
           />
+
+          <Stack.Screen
+            name="My Voucher"
+            component={MyVoucher}
+            options={{ headerShown: false }}
+          />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
         </>
       )}
     </Stack.Navigator>
