@@ -7,9 +7,32 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
+import Axios from "axios";
 
-export default function Rewards({navigation}) {
+export default function Rewards({ navigation }) {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+  const [reward, setReward] = useState([]);
+
+  const fetchReward = async () => {
+    let token = await SecureStore.getItemAsync("accessToken");
+    try {
+      const response = await Axios.get(`${apiUrl}vouchers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setReward(response.data);
+    } catch (error) {
+      console.log(error, "rewards");
+    }
+  };
+
+  useEffect(() => {
+    fetchReward();
+  }, []);
+
   return (
     <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">
@@ -55,164 +78,45 @@ export default function Rewards({navigation}) {
         </View>
 
         {/* card voucher */}
-        <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
-          <View className="flex justify-center items-center">
-            <Image
-              source={require("../../assets/ice1.png")}
-              className="w-24 h-32 "
-            />
-          </View>
+        {reward.map((item) => (
+          <View key={item.id}>
+            <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
+              <View className="flex justify-center items-center">
+              <Image source={{ uri: item.imageUrl }} className="w-24 h-32" />
+              </View>
 
-          <View className="mx-4 w-60 m ">
-            <Text className="text-xl font-normal text-red-700">
-              SAVE 10% OFF
-            </Text>
-            <Text className="text-lg font-semibold">Godiva Cafe</Text>
-
-            <View>
-              <Text className="text-base font-extralight">
-                Godiva Cafe is offering Discount of 10% off for 1 ice cream
-              </Text>
-            </View>
-
-            <View className="flex justify-end items-end m-">
-              <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <TouchableOpacity onPress={() => {
-                            navigation.removeListener;
-                            navigation.navigate("Detail Rewards");
-                        }}>
-                  <Text className="text-lg text-[#f2f2f2] text-center">
-                    Reedem
+              <View className="mx-4 w-60 m ">
+                <View className="bg-[#eec6c6] rounded-3xl p-2 mb-1 w-24 items-center">
+                  <Text className="text-base font-normal text-red-700">
+                    {item.pointRequired} Poin
                   </Text>
-                </TouchableOpacity>
+                </View>
+                <Text className="text-lg font-semibold">{item.title}</Text>
+
+                <View>
+                  <Text className="text-base font-extralight">
+                    {item.content}
+                  </Text>
+                </View>
+
+                <View className="flex justify-end items-end m-">
+                  <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.removeListener;
+                        navigation.navigate("Detail Rewards");
+                      }}
+                    >
+                      <Text className="text-lg text-[#f2f2f2] text-center">
+                        Use Voucher
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-
-        {/* card voucher */}
-        <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
-          <View className="flex justify-center items-center">
-            <Image
-              source={require("../../assets/ice1.png")}
-              className="w-24 h-32 "
-            />
-          </View>
-
-          <View className="mx-4 w-60 m ">
-            <Text className="text-xl font-normal text-red-700">
-              SAVE 10% OFF
-            </Text>
-            <Text className="text-lg font-semibold">Godiva Cafe</Text>
-
-            <View>
-              <Text className="text-base font-extralight">
-                Godiva Cafe is offering Discount of 10% off for 1 ice cream
-              </Text>
-            </View>
-
-            <View className="flex justify-end items-end m-">
-              <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <Text className="text-lg text-[#f2f2f2] text-center">
-                  Reedem
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        {/* card voucher */}
-        <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
-          <View className="flex justify-center items-center">
-            <Image
-              source={require("../../assets/ice1.png")}
-              className="w-24 h-32 "
-            />
-          </View>
-
-          <View className="mx-4 w-60 m ">
-            <Text className="text-xl font-normal text-red-700">
-              SAVE 10% OFF
-            </Text>
-            <Text className="text-lg font-semibold">Godiva Cafe</Text>
-
-            <View>
-              <Text className="text-base font-extralight">
-                Godiva Cafe is offering Discount of 10% off for 1 ice cream
-              </Text>
-            </View>
-
-            <View className="flex justify-end items-end m-">
-              <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <Text className="text-lg text-[#f2f2f2] text-center">
-                  Reedem
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        {/* card voucher */}
-        <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
-          <View className="flex justify-center items-center">
-            <Image
-              source={require("../../assets/ice1.png")}
-              className="w-24 h-32 "
-            />
-          </View>
-
-          <View className="mx-4 w-60 m ">
-            <Text className="text-xl font-normal text-red-700">
-              SAVE 10% OFF
-            </Text>
-            <Text className="text-lg font-semibold">Godiva Cafe</Text>
-
-            <View>
-              <Text className="text-base font-extralight">
-                Godiva Cafe is offering Discount of 10% off for 1 ice cream
-              </Text>
-            </View>
-
-            <View className="flex justify-end items-end m-">
-              <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <Text className="text-lg text-[#f2f2f2] text-center">
-                  Reedem
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        {/* card voucher */}
-        <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
-          <View className="flex justify-center items-center">
-            <Image
-              source={require("../../assets/ice1.png")}
-              className="w-24 h-32 "
-            />
-          </View>
-
-          <View className="mx-4 w-60 m ">
-            <Text className="text-xl font-normal text-red-700">
-              SAVE 10% OFF
-            </Text>
-            <Text className="text-lg font-semibold">Godiva Cafe</Text>
-
-            <View>
-              <Text className="text-base font-extralight">
-                Godiva Cafe is offering Discount of 10% off for 1 ice cream
-              </Text>
-            </View>
-
-            <View className="flex justify-end items-end m-">
-              <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                <Text className="text-lg text-[#f2f2f2] text-center">
-                  Reedem
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        ))}
       </SafeAreaView>
     </ScrollView>
   );

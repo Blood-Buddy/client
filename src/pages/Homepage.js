@@ -10,7 +10,8 @@ import React, { useEffect, useState } from "react";
 import RequestCard from "../components/RequestCard";
 import { Animated } from "react-native";
 import Axios from "axios";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
+import { useIsFocused } from "@react-navigation/native";
 
 const av = new Animated.Value(0);
 av.addListener(() => {
@@ -18,22 +19,26 @@ av.addListener(() => {
 });
 
 export default function Homepage({ navigation }) {
+    // console.log(token);
+    const isFocused = useIsFocused();
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [user, setUser] = useState([]);
     const [requests, setRequests] = useState([]);
-
     const fetchUser = async () => {
-        const token = await SecureStore.getItemAsync('accessToken');
-        console.log(token, 'homepage token');
+        let token = await SecureStore.getItemAsync('accessToken')
+        // console.log(token, "tokennnnn");
         try {
             const response = await Axios.get(`${apiUrl}user`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
+
+            // console.log(response.data, "data user");
             setUser(response.data);
         } catch (error) {
-            console.log(error, "fetch user error");
+            console.log(error, "homepage");
+            // throw error
         }
     };
 
@@ -45,20 +50,23 @@ export default function Homepage({ navigation }) {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            if(response) {
+            if (response) {
                 setRequests(response.data);
             }
-            
+
         } catch (error) {
             console.log(JSON.stringify(error), "fetch requests error");
         }
     }
     // console.log(requests, 'fetch request');
 
+
     useEffect(() => {
-        fetchUser();
-        fetchRequests();
-    }, []);
+        if (isFocused) {
+            fetchUser();
+            fetchRequests();
+        }
+    }, [isFocused]);
 
     // console.log(requests, "requests");
     return (
