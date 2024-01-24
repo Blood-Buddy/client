@@ -16,6 +16,7 @@ import HomepageHospital from "../pages/hospital/HomepageHospital";
 const Stack = createStackNavigator();
 
 export default function StackNavigator() {
+  const { isLoggedIn, role } = useContext(LoginContext);
   return (
     <Stack.Navigator>
       {isLoggedIn ? (

@@ -66,48 +66,29 @@ export default function Rewards({ navigation, route }) {
           <Text className="font-bold text-2xl mb-2">Voucher</Text>
         </View>
 
-        <View className="flex flex-row gap-8">
-          {/* total point */}
-          <View>
-            <View style={styles.pointsContainer}>
-              <Text className="text-4xl">100</Text>
-              <Image
-                source={require("../../assets/voucher.png")}
-                style={styles.imgVoucher}
-              />
+        {/* card cek disini */}
+        <View className="">
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("My Voucher");
+            }}
+            className="bg-red-700 p-3 rounded-lg mt-4"
+            style={styles.cardVoc}
+          >
+            <View className="flex flex-row gap-8">
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("My Voucher");
+                }}
+              >
+                <Text className="text-xl font-bold">
+                  CHECK VOUCHER BLOODBUDDY
+                </Text>
+                <Text className="text-xl text-white font-bold">DISINI!</Text>
+              </TouchableOpacity>
             </View>
-
-            <View style={styles.yourPoint}>
-              <Text className="text-2xl font-medium">your points</Text>
-            </View>
-          </View>
-
-          {/* card cek disini */}
-          <View className="">
-            <TouchableOpacity
-              onPress={() => {
-                navigation.removeListener;
-                navigation.navigate("My Voucher");
-              }}
-              className="bg-red-700 p-3 rounded-lg mt-4"
-              style={styles.cardVoc}
-            />
-              <View className="flex flex-row gap-8">
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate("My Voucher");
-                  }}
-                />
-                  <Text className="text-base font-bold">
-                    CHECK VOUCHER BLOODBUDDY
-                  </Text>
-                  {/* <Text className="text-base font-bold">BLOODBUDDY</Text> */}
-                  <Text className="text-base text-white font-bold">
-                    DISINI!
-                  </Text>
-                </View>
-              </View>
-            </View>
+          </TouchableOpacity>
+        </View>
 
         {/* card voucher */}
         {reward.map((item) => (
@@ -174,7 +155,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   cardVoc: {
-    marginLeft: -17,
+    marginLeft: 0,
     marginTop: 20,
   },
 });
