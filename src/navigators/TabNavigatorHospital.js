@@ -5,6 +5,7 @@ import Settings from "../pages/Settings";
 import HomeHospital from "../pages/hospital/HomeHospital";
 import Request from "../pages/hospital/Request";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ScanQR from "../pages/hospital/ScanQR";
 
 
 const Tab = createBottomTabNavigator();
@@ -22,13 +23,13 @@ export default function TabNavigatorHospital() {
                     }
                 }
             }} />
-            <Tab.Screen name="Appointment" component={Appointment} options={{
+            <Tab.Screen name="Scan QR" component={ScanQR} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     if (focused) {
-                        return <Ionicons name="water" size={24} color="#AE2111" />
+                        return <Ionicons name="qr-code" size={24} color="#AE2111" />
                     } else {
-                        return <Ionicons name="water-outline" size={24} color={'#AE2111'} />
+                        return <Ionicons name="qr-code-outline" size={24} color={'#AE2111'} />
                     }
                 }
             }} />
