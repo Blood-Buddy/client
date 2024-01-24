@@ -9,6 +9,7 @@ import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import MyVoucher from "../pages/MyVoucher";
+import HomeHospital from "../pages/HomeHospital";
 // console.log(process.env)
 
 const Stack = createStackNavigator();
@@ -54,6 +55,12 @@ export default function StackNavigator() {
           <Stack.Screen
             name="My Voucher"
             component={MyVoucher}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="Home Hospital"
+            component={HomeHospital}
             options={{ headerShown: false }}
           />
         </>

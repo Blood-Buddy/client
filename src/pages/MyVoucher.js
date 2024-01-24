@@ -43,7 +43,9 @@ export default function MyVoucher({ voucherData, navigation }) {
 
               <View className="flex justify-end items-end mr-2">
                 <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => {
+                    navigation.navigate("Home Hospital");
+                  }}>
                     <Text className="text-lg text-[#f2f2f2] text-center">
                       Use Voucher
                     </Text>
