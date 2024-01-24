@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import Axios from "axios";
+import Toast from "react-native-toast-message";
 
 export default function Rewards({ navigation, route }) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -51,8 +52,10 @@ export default function Rewards({ navigation, route }) {
       setVoucherId(voucherId);
       navigation.navigate("My Voucher", { voucherId: voucherId });
     } catch (error) {
-
-      console.log(error.response.data, "useVoucher di reward");
+      Toast.show({
+        type: 'success',
+        text1: error.response.data.message
+      });
     }
   };
 

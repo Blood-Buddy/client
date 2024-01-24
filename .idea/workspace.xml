@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62eb0af8-b5b8-4425-b994-f52f988dda00" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/hospital/AddBalance.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/hospital/InputBalance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigators/StackNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigators/StackNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RequestCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RequestCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MyVoucher.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyVoucher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Rewards.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Rewards.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/hospital/HomeHospital.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/hospital/HomeHospital.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging dev",
+    "git-widget-placeholder": "dev",
     "last_opened_file_path": "/Users/macbookpro/Documents/hacktiv8/javascript/tugas/phase 3/week 3/day 1/final-project/client/src/pages/hospital",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
