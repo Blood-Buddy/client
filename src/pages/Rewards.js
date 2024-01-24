@@ -11,9 +11,10 @@ import React, { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import Axios from "axios";
 
-export default function Rewards({ navigation }) {
+export default function Rewards({ navigation, route }) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [reward, setReward] = useState([]);
+  const [voucherId, setVoucherId] = useState(route.params);
 
   const fetchReward = async () => {
     let token = await SecureStore.getItemAsync("accessToken");
@@ -29,12 +30,37 @@ export default function Rewards({ navigation }) {
     }
   };
 
+  // console.log(reward, "<<<< from fetch reward");
+
+  const handleUseVoucher = async (i) => {
+    let token = await SecureStore.getItemAsync("accessToken");
+    try {
+      // console.log(i,"masuk use voucher");
+
+      const response = await Axios.post(
+        `${apiUrl}vouchers/claim/${i}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // console.log(response, ">>> handle use voucher");
+      setVoucherId(voucherId);
+      navigation.navigate("My Voucher", { voucherId: voucherId });
+    } catch (error) {
+      console.log(error, "useVoucher di reward");
+    }
+  };
+
   useEffect(() => {
     fetchReward();
   }, []);
 
   return (
-    <ScrollView className="bg-[#F2F2F2]">
+    <ScrollView style={{ backgroundColor: "#F2F2F2" }}>
       <SafeAreaView className="mx-5 px-5">
         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
           <Text className="font-bold text-2xl mb-2">Voucher</Text>
@@ -63,7 +89,11 @@ export default function Rewards({ navigation }) {
               style={styles.cardVoc}
             >
               <View className="flex flex-row gap-8">
-                <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("My Voucher");
+                  }}
+                >
                   <Text className="text-base font-bold">
                     CHECK VOUCHER BLOODBUDDY
                   </Text>
@@ -71,7 +101,7 @@ export default function Rewards({ navigation }) {
                   <Text className="text-base text-white font-bold">
                     DISINI!
                   </Text>
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -79,10 +109,10 @@ export default function Rewards({ navigation }) {
 
         {/* card voucher */}
         {reward.map((item) => (
-          <View key={item.id}>
+          <View key={item._id}>
             <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row">
               <View className="flex justify-center items-center">
-              <Image source={{ uri: item.imageUrl }} className="w-24 h-32" />
+                <Image source={{ uri: item.imageUrl }} className="w-24 h-32" />
               </View>
 
               <View className="mx-4 w-60 m ">
@@ -102,10 +132,7 @@ export default function Rewards({ navigation }) {
                 <View className="flex justify-end items-end m-">
                   <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
                     <TouchableOpacity
-                      onPress={() => {
-                        navigation.removeListener;
-                        navigation.navigate("Detail Rewards");
-                      }}
+                      onPress={() => handleUseVoucher(item._id)}
                     >
                       <Text className="text-lg text-[#f2f2f2] text-center">
                         Use Voucher

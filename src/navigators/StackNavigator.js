@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
+import MyVoucher from "../pages/MyVoucher";
+import HomeHospital from "../pages/HomeHospital";
 import HomepageHospital from "../pages/hospital/HomepageHospital";
 // console.log(process.env)
 
@@ -57,8 +59,16 @@ export default function StackNavigator() {
         )
       ) : (
         <>
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
         </>
       )}
     </Stack.Navigator>
