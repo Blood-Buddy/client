@@ -27,7 +27,8 @@
     "expo-calendar": "~11.3.2",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-webview": "^13.6.4",
-    "expo-checkbox": "~2.4.0"
+    "expo-checkbox": "~2.4.0",
+    "expo-barcode-scanner": "~12.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

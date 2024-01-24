@@ -12,6 +12,7 @@ import MyVoucher from "../pages/MyVoucher";
 import TabNavigatorHospital from "./TabNavigatorHospital";
 import AddBalance from "../pages/hospital/AddBalance";
 import InputBalance from "../pages/hospital/InputBalance";
+import DetailAppointment from "../pages/hospital/DetailAppointment";
 
 const Stack = createStackNavigator();
 
@@ -22,21 +23,26 @@ export default function StackNavigator() {
       {isLoggedIn ? (
         role === "hospital" ? (
             <>
-              <Stack.Screen
-                  name="Homepage Hospital"
-                  component={TabNavigatorHospital}
-                  options={{ headerShown: false, title: "Homepage", }}
-              />
-              <Stack.Screen
-                  name="AddBalance"
-                  component={AddBalance}
-                  options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                  name="InputBalance"
-                  component={InputBalance}
-                  options={{ headerShown: false }}
-              />
+                <Stack.Screen
+                    name="Homepage Hospital"
+                    component={TabNavigatorHospital}
+                    options={{ headerShown: false, title: "Homepage", }}
+                />
+                <Stack.Screen
+                    name="AddBalance"
+                    component={AddBalance}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="InputBalance"
+                    component={InputBalance}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Detail Appointment"
+                    component={DetailAppointment}
+                    options={{ headerShown: false, title: "Detail Appointment", }}
+                />
             </>
         ) : (
           <>

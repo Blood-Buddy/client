@@ -22,6 +22,7 @@ export default function HomeHospital({navigation}) {
   const isFocused = useIsFocused();
 
   const [hospitalProfile, setHospitalProfile] = useState([])
+  const [appointments, setAppointments] = useState([])
 
   const fetchHospitalProfile = async () => {
     const token = await SecureStore.getItemAsync('accessToken');
@@ -38,65 +39,81 @@ export default function HomeHospital({navigation}) {
     }
   }
 
+  const fetchAppointments = async () => {
+    const token = await SecureStore.getItemAsync('accessToken');
+    console.log(token, "token");
+    try {
+      const response = await Axios.get(`${apiUrl}appointment/hospital`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      // console.log(response, "response fetch appointments");
+      setAppointments(response.data);
+    } catch (error) {
+      console.log(error, "error fetch appointments");
+    }
+  }
+
   useEffect(() => {
     if (isFocused) {
       fetchHospitalProfile();
+      fetchAppointments();
     }
   }, [isFocused]);
 
-
+  // console.log(appointments, "appointments");
   // console.log(hospitalProfile);
-  return (
-    <SafeAreaView className="bg-red-700">
-      <ScrollView className="px-5 h-full">
-        <View style={styles.container}>
-          {/* profile */}
-          <View style={styles.card}>
-            <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
-              {hospitalProfile?.name}
-            </Text>
-
-            <View style={styles.centerLine}>
-              <View style={styles.line}></View>
-            </View>
-
-            <View className="flex flex-row">
-              <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Address</Text>
-              <Text style={styles.textAddress}>
-                : {hospitalProfile?.address}
+  if (appointments.length !== 0) {
+    return (
+      <SafeAreaView className="">
+        <ScrollView className="px-5 h-full">
+          <View style={styles.container}>
+            {/* profile */}
+            <View style={styles.card}>
+              <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
+                {hospitalProfile?.name}
               </Text>
-            </View>
-            <View className="flex flex-row">
-              <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Phone</Text>
-              <Text style={styles.textPhone}>: {hospitalProfile?.phoneNumber}</Text>
-            </View>
-            <View className="flex mb-4">
-              <View className='flex flex-row'>
-                <View className='border-b-2 w-full items-center justify-center'>
 
-                  <Text className="mt-2 font-base text-2xl text-center w-full">Blood Stock </Text>
+              <View style={styles.centerLine}>
+                <View style={styles.line}></View>
+              </View>
+
+              <View className="flex flex-row">
+                <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Address</Text>
+                <Text style={styles.textAddress}>
+                  : {hospitalProfile?.address}
+                </Text>
+              </View>
+              <View className="flex flex-row">
+                <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Phone</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.phoneNumber}</Text>
+              </View>
+              <View className="flex mb-4">
+                <View className='flex flex-row'>
+                  <View className='border-b-2 w-full items-center justify-center'>
+
+                    <Text className="mt-2 font-base text-2xl text-center w-full">Blood Stock </Text>
+                  </View>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type A</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.A}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type B</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.B}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type AB</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.AB}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type O</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.O}</Text>
                 </View>
               </View>
-              <View className='flex flex-row'>
-                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type A</Text>
-                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.A}</Text>
-              </View>
-              <View className='flex flex-row'>
-                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type B</Text>
-                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.B}</Text>
-              </View>
-              <View className='flex flex-row'>
-                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type AB</Text>
-                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.AB}</Text>
-              </View>
-              <View className='flex flex-row'>
-                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type O</Text>
-                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.O}</Text>
-              </View>
-
-
             </View>
-          </View>
 
           {/* saldo */}
           <View style={styles.cardSaldo}>
@@ -114,145 +131,121 @@ export default function HomeHospital({navigation}) {
               </View>
             </View>
 
-            <View style={styles.centerLine}>
-              <View style={styles.line}></View>
-            </View>
-
-            <View className="flex flex-row ml-2">
-              <Text style={styles.texBalance}>{hospitalProfile?.balance?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
-            </View>
-          </View>
-
-          {/* card request blood */}
-          <View style={styles.cardBloodRequest}>
-            <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
-              <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
-                Appointments
-              </Text>
-            </View>
-
-            {/* card patient */}
-            <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 mx-1 mb-1">
-              <View className="flex flex-row justify-between">
-                <Text className="mt-1 ml-3 text-xl font-base mb-1">
-                  Patient
-                </Text>
-              </View>
-
               <View style={styles.centerLine}>
                 <View style={styles.line}></View>
               </View>
 
-              <View className="flex flex-row">
-                <Text className="mt-2 ml-3 text-lg">Name</Text>
-                <Text style={styles.textAddress}>: Dan William</Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">NIK</Text>
-                <Text style={styles.textNik}>: 345678956767778</Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">Address</Text>
-                <Text style={styles.textNik}>
-                  : Jalan Metro Duta Kav. UE Pd. Pinang Kec. Kby lama, Daerah
-                  Khusus Ibukota Jakarta, 12310
-                </Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">Phone</Text>
-                <Text style={styles.textNik}>: 0812456789</Text>
-              </View>
-              <View className="flex flex-row mb-4">
-                <Text className="ml-3 text-lg">Blood Type</Text>
-                <Text style={styles.textNik}>: A</Text>
-              </View>
-
-              <View className="flex flex-row self-end">
-                <Text className="text-sm mt-3 ml-3">
-                  Session 1 (06.00 - 11.30)
-                </Text>
-                <View className="mx-2 w-24">
-                  <TouchableOpacity className=" bg-[#048621] p-2 items-center justify-center rounded-lg">
-                    <Text className="text-[#f2f2f2] font-bold text-md">
-                      Decline
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-
-                <View className="w-24">
-                  <TouchableOpacity className=" bg-red-700 p-2 items-center justify-center rounded-lg">
-                    <Text className="text-[#f2f2f2] font-bold text-md">
-                      Accept
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+              <View className="flex flex-row ml-2">
+                <Text style={styles.texBalance}>{hospitalProfile?.balance?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
               </View>
             </View>
-            {/* card patient */}
-            <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 mx-1 mb-1">
-              <View className="flex flex-row justify-between">
-                <Text className="mt-1 ml-3 text-xl font-base mb-1">
-                  Patient
+
+            {/* card request blood */}
+            <View style={styles.cardBloodRequest}>
+              <View className="border-b-2 flex-row justify-between items-center border-b-red-700 mb-3">
+                <Text className="mt-1 ml-3 text-2xl font-base text-center mb-2">
+                  Appointments
                 </Text>
               </View>
 
-              <View style={styles.centerLine}>
-                <View style={styles.line}></View>
-              </View>
+              {/* card patient */}
+              {appointments.map((appointment, index) => (
+                <>
+                  <View key={index} style={styles.appointmentContainer}>
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Name</Text>
+                      <Text style={styles.value}>{appointment?.user?.name}</Text>
+                    </View>
 
-              <View className="flex flex-row">
-                <Text className="mt-2 ml-3 text-lg">Name</Text>
-                <Text style={styles.textAddress}>: Dan William</Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">NIK</Text>
-                <Text style={styles.textNik}>: 345678956767778</Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">Address</Text>
-                <Text style={styles.textNik}>
-                  : Jalan Metro Duta Kav. UE Pd. Pinang Kec. Kby lama, Daerah
-                  Khusus Ibukota Jakarta, 12310
-                </Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="ml-3 text-lg">Phone</Text>
-                <Text style={styles.textNik}>: 0812456789</Text>
-              </View>
-              <View className="flex flex-row mb-4">
-                <Text className="ml-3 text-lg">Blood Type</Text>
-                <Text style={styles.textNik}>: A</Text>
-              </View>
+                    <View className='my-1' style={styles.line}></View>
 
-              <View className="flex flex-row self-end">
-                <Text className="text-sm mt-3 ml-3">
-                  Session 1 (06.00 - 11.30)
-                </Text>
-                <View className="mx-2 w-24">
-                  <TouchableOpacity className=" bg-[#048621] p-2 items-center justify-center rounded-lg">
-                    <Text className="text-[#f2f2f2] font-bold text-md">
-                      Decline
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>NIK</Text>
+                      <Text style={styles.value}> {appointment?.user?.nik}</Text>
+                    </View>
 
-                <View className="w-24">
-                  <TouchableOpacity className=" bg-red-700 p-2 items-center justify-center rounded-lg">
-                    <Text className="text-[#f2f2f2] font-bold text-md">
-                      Accept
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Email</Text>
+                      <Text style={styles.value}> {appointment?.user?.email}</Text>
+                    </View>
+
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Address</Text>
+                      <Text style={styles.value}> {appointment?.user?.address}</Text>
+                    </View>
+
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Phone</Text>
+                      <Text style={styles.value}> {appointment?.user?.phoneNumber}</Text>
+                    </View>
+
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Blood Type</Text>
+                      <Text style={styles.value}> {appointment?.user?.bloodType}</Text>
+                    </View>
+
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Session</Text>
+                      <Text style={styles.value}>
+                        {appointment?.session === 1 ? "06.00 - 11.30" : appointment?.session === 2 ? "13.30 - 18.00" : ""}
+                      </Text>
+                    </View>
+
+                    <View style={styles.appointmentInfoContainer}>
+                      <Text style={styles.label}>Appointment date</Text>
+                      <Text style={styles.value}> {appointment?.date.slice(0, 10)}</Text>
+                    </View>
+                  </View>
+                </>
+              ))}
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+        </ScrollView>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView>
+        <ScrollView>
+          <Text>Kosong</Text>
+        </ScrollView>
+      </SafeAreaView>
+    )
+  }
+
 }
 
 const styles = StyleSheet.create({
+  appointmentContainer: {
+    backgroundColor: "#F2F2F2",
+    marginTop: 5,
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    marginHorizontal: 1,
+    marginBottom: 10,
+  },
+  appointmentInfoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  value: {
+    marginLeft: 10,
+    fontSize: 16,
+  },
+  line: {
+    height: 1,
+    backgroundColor: "gray",
+    marginVertical: 5,
+  },
   container: {
     flex: 1,
     alignItems: "center",
