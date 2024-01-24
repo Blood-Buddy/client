@@ -51,7 +51,8 @@ export default function Rewards({ navigation, route }) {
       setVoucherId(voucherId);
       navigation.navigate("My Voucher", { voucherId: voucherId });
     } catch (error) {
-      console.log(error, "useVoucher di reward");
+
+      console.log(error.response.data, "useVoucher di reward");
     }
   };
 

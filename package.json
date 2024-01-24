@@ -23,9 +23,11 @@
     "react-icons": "^5.0.1",
     "react-native": "0.72.6",
     "react-native-calendars": "^1.1303.0",
-    "react-native-dropdown-select-list": "^2.0.5",
     "react-native-toast-message": "^2.2.0",
-    "expo-calendar": "~11.3.2"
+    "expo-calendar": "~11.3.2",
+    "react-native-dropdown-select-list": "^2.0.5",
+    "react-native-webview": "^13.6.4",
+    "expo-checkbox": "~2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
