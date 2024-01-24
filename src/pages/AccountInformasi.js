@@ -263,6 +263,7 @@ export default function AccountInformasi({ navigation }) {
           <Text className="text-xl font-medium">NIK</Text>
 
           <TextInput
+            keyboardType="numeric"
             placeholder="NIK"
             value={nik}
             onChangeText={(text) => setNik(text)}
@@ -274,6 +275,7 @@ export default function AccountInformasi({ navigation }) {
           <Text className="text-xl font-medium">Phone Number</Text>
 
           <TextInput
+            keyboardType="numeric"
             placeholder="Phone number"
             value={phoneNumber}
             onChangeText={(text) => setPhoneNumber(text)}
