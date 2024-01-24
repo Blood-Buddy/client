@@ -29,7 +29,7 @@ export default function Homepage({ navigation }) {
             // console.log('History data fetched:', historyData.data);
 
             setHistory(historyData.data)
-            setUser(userData.data);
+            setUser(userData.data );
             setRequests(requestsData.data);
         } catch (error) {
             console.log('Error fetching user and requests:', error);
@@ -42,11 +42,11 @@ export default function Homepage({ navigation }) {
         }
     }, [isFocused]);
 
+    // console.log(user, "<<< user");
     return (
         <SafeAreaView className="bg-[#F2F2F2]">
             <ScrollView className="px-5 h-full">
-                {user.length > 0 && (
-                    <View key={user[0]._id}>
+                    <View key={user?._id}>
                         <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
                             <Text className="font-bold text-2xl mb-2">Profile</Text>
                             <TouchableOpacity
@@ -61,15 +61,15 @@ export default function Homepage({ navigation }) {
 
                         <View className="flex-1 flex-row">
                             <View className="mt-2 w-2/3 border-r-2 border-r-red-700">
-                                <Text className="font-bold text-lg">{user[0]?.name}</Text>
-                                <Text className="text-md text-red-700">{user[0]?.nik}</Text>
+                                <Text className="font-bold text-lg">{user?.name}</Text>
+                                <Text className="text-md text-red-700">{user?.nik}</Text>
                             </View>
 
                             <View className="w-1/3">
                                 <View className="flex-1 flex-row items-center">
                                     <Ionicons name="water" size={32} color="#AE2111" />
                                     <Text className="ml-2 text-4xl font-bold">
-                                        {user[0]?.bloodType}
+                                        {user?.bloodType}
                                     </Text>
                                 </View>
                             </View>
@@ -106,12 +106,11 @@ export default function Homepage({ navigation }) {
                                 <Text className="font-bold text-sm text-red-700">Rewards</Text>
                                 <View className="flex flex-row items-center">
                                     <FontAwesome5 name="award" size={20} color="#AE2111" />
-                                    <Text className="text-lg ml-1">{user[0]?.points}</Text>
+                                    <Text className="text-lg ml-1">{user?.points}</Text>
                                 </View>
                             </View>
                         </View>
                     </View>
-                )}
 
                 <TouchableOpacity
                     className="mt-2 bg-red-700 p-3 items-center justify-center rounded-lg"

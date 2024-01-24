@@ -9,9 +9,7 @@ import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import MyVoucher from "../pages/MyVoucher";
-import HomeHospital from "../pages/hospital/HomeHospital";
 import TabNavigatorHospital from "./TabNavigatorHospital";
-// console.log(process.env)
 
 const Stack = createStackNavigator();
 
@@ -42,8 +40,7 @@ export default function StackNavigator() {
               name="Book Appointment"
               component={BookAppointment}
               options={{
-                headerStyle: { backgroundColor: "#F2F2F2" },
-                headerBackTitleVisible: false,
+                headerShown: false,
               }}
             />
             <Stack.Screen

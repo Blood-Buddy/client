@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
-import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import * as SecureStore from 'expo-secure-store';
 import dateFormatter from "../helpers/dateFormatter";
 import { useIsFocused } from "@react-navigation/core";
@@ -8,6 +8,8 @@ export default function Appointment() {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const isFocused = useIsFocused();
     const [appointments, setAppointments] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedQRCode, setSelectedQRCode] = useState(null);
 
 
     const fetchAppointments = async () => {
@@ -32,7 +34,7 @@ export default function Appointment() {
 
     if (appointments.length !== 0) {
         return (
-            <SafeAreaView>
+            <SafeAreaView className='mb-8'>
                 <View className='border-b-2 border-red-700 mx-3'>
                     <Text className='text-2xl font-bold'>Your Appointment</Text>
                 </View>
@@ -70,16 +72,44 @@ export default function Appointment() {
                                         </View>
                                     </View>
                                     <View className="mt-2 flex flex-row self-end">
+
+                                        <View className='w-24 mx-4'>
+                                            <TouchableOpacity onPress={() => {
+                                                setSelectedQRCode(item?.qrCode);
+                                                setModalVisible(true);
+                                            }} className="mt-2 bg-green-700 p-2 items-center justify-center rounded-lg">
+                                                <Text className="text-[#f2f2f2] font-bold text-md">Show QR</Text>
+                                            </TouchableOpacity>
+                                        </View>
+
                                         <View className='w-24'>
                                             <TouchableOpacity className="mt-2 bg-red-700 p-2 items-center justify-center rounded-lg">
                                                 <Text className="text-[#f2f2f2] font-bold text-md">Cancel</Text>
                                             </TouchableOpacity>
                                         </View>
+
+
                                     </View>
                                 </View>
                             </View>
                         ))}
                     </View>
+
+                    <Modal animationType="fade" transparent={false} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
+                        <SafeAreaView className='items-center justify-center'>
+                            <View className='items-center justify-center h-full'>
+                                <Text className='text-center text-[#2e2e2e]/50 mt-2'>Please show the QR code below to the hospital staff.</Text>
+                                <Image source={{ uri: selectedQRCode }} className='object-cover h-96 w-96' />
+                                <View className='w-24 mx-4'>
+
+                                    <TouchableOpacity className="w-full bg-red-700 p-2 items-center justify-center rounded-lg" onPress={() => setModalVisible(!modalVisible)}>
+                                        <Text className="text-[#f2f2f2] font-semibold text-xl">Done</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </SafeAreaView>
+                    </Modal>
+
                 </ScrollView>
             </SafeAreaView>
         );
