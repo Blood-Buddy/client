@@ -202,15 +202,13 @@ export default function AccountInformasi({ navigation }) {
       });
 
       // console.log(response.data, "load user di account informasi");
-      response.data.map((item) => {
-        setEmail(item.email);
-        setName(item.name);
-        setNik(item.nik);
-        setPhoneNumber(item.phone);
-        setAddress(item.address);
-        setProvince(item.province);
-        setBloodType(item.bloodType);
-      })
+        setEmail(response.data.email);
+        setName(response.data.name);
+        setNik(response.data.nik);
+        setPhoneNumber(response.data.phone);
+        setAddress(response.data.address);
+        setProvince(response.data.province);
+        setBloodType(response.data.bloodType);
 
     } catch (error) {
       console.log(error, ">> account Informasi");
