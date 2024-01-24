@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
-import Homepage from "../pages/Homepage";
 import Appointment from "../pages/Appointment";
-import Rewards from "../pages/Rewards";
 import Settings from "../pages/Settings";
 import HomeHospital from "../pages/hospital/HomeHospital";
+import Request from "../pages/hospital/Request";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -31,13 +32,13 @@ export default function TabNavigatorHospital() {
                     }
                 }
             }} />
-            <Tab.Screen name="Rewards" component={Rewards} options={{
+            <Tab.Screen name="Request" component={Request} options={{
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     if (focused) {
-                        return <Ionicons name="gift" size={24} color="#AE2111" />
+                        return <Ionicons name="add-circle" size={24} color="#AE2111" />
                     } else {
-                        return <Ionicons name="gift-outline" size={24} color={'#AE2111'} />
+                        return <Ionicons name="add-circle-outline" size={24} color={'#AE2111'} />
                     }
                 }
             }} />
