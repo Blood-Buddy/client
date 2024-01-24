@@ -177,7 +177,7 @@ export default function AccountInformasi({ navigation }) {
         email,
         name,
         nik,
-        phone,
+        phoneNumber,
         address,
         province,
         bloodType
