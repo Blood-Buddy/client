@@ -17,9 +17,9 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 // const token = await SecureStore.getItemAsync('accessToken');
 // console.log('Token fetched:', token);
 
-export default function AddBalance({navigation}) {
+export default function AddBalance({navigation, route}) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
+  let {url} = route.params
 
   let [newWebView, setNewWebView] = useState(null);
   const webViewRef = useRef(null);
@@ -37,17 +37,14 @@ export default function AddBalance({navigation}) {
   }
 
 
-  // console.log(hospitalProfile);
   return (
 
 
       <WebView
           ref={webViewRef}
-          source={{uri: 'https://checkout-staging.xendit.co/latest/65b11a682f2ee0ac6d481dcc'}}
+          source={{uri: url}}
           onNavigationStateChange={(newNavState) => handleWebViewNavigationStateChange(newNavState)}
       />
-    // <SafeAreaView className="bg-red-700">
-    //
-    // </SafeAreaView>
+
   );
 }

@@ -107,7 +107,7 @@ export default function HomeHospital({navigation}) {
               <View className="mr-2">
                 <TouchableOpacity onPress={() => {
                   navigation.removeListener;
-                  navigation.navigate("AddBalance");
+                  navigation.navigate("InputBalance");
                 }}>
                   <AntDesign name="pluscircle" size={24} color="#AE2111" />
                 </TouchableOpacity>

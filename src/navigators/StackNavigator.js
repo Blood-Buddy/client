@@ -11,6 +11,7 @@ import Register from "../pages/register";
 import MyVoucher from "../pages/MyVoucher";
 import TabNavigatorHospital from "./TabNavigatorHospital";
 import AddBalance from "../pages/hospital/AddBalance";
+import InputBalance from "../pages/hospital/InputBalance";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,11 @@ export default function StackNavigator() {
               <Stack.Screen
                   name="AddBalance"
                   component={AddBalance}
+                  options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                  name="InputBalance"
+                  component={InputBalance}
                   options={{ headerShown: false }}
               />
             </>
