@@ -10,7 +10,7 @@ import {
 import React from "react";
 import WideButton from "../components/WideButton";
 
-export default function DetailRewards() {
+export default function DetailRewards({navigation}) {
   return (
     <ScrollView className="bg-[#F2F2F2]">
       <SafeAreaView className="mx-5 px-5">
@@ -64,7 +64,15 @@ export default function DetailRewards() {
         </View>
 
         <View className="mt-52">
-          <WideButton className="mt-4" label="Reedem" />
+          <TouchableOpacity
+            className="mt-2 bg-red-700 p-3 items-center justify-center rounded-lg"
+            onPress={() => {
+              navigation.removeListener;
+              navigation.navigate("Voucher Confirmation");
+            }}
+          >
+            <Text className="text-[#f2f2f2] font-bold text-xl">Reedem</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </ScrollView>

@@ -84,16 +84,20 @@ export default function Rewards({ navigation, route }) {
 
           {/* card cek disini */}
           <View className="">
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                navigation.removeListener;
+                navigation.navigate("My Voucher");
+              }}
               className="bg-red-700 p-3 rounded-lg mt-4"
               style={styles.cardVoc}
-            >
+            />
               <View className="flex flex-row gap-8">
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate("My Voucher");
                   }}
-                >
+                />
                   <Text className="text-base font-bold">
                     CHECK VOUCHER BLOODBUDDY
                   </Text>
@@ -101,11 +105,9 @@ export default function Rewards({ navigation, route }) {
                   <Text className="text-base text-white font-bold">
                     DISINI!
                   </Text>
-                </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        </View>
 
         {/* card voucher */}
         {reward.map((item) => (
@@ -174,6 +176,5 @@ const styles = StyleSheet.create({
   cardVoc: {
     marginLeft: -17,
     marginTop: 20,
-    // backgroundColor: "black"
   },
 });
