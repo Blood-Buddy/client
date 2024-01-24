@@ -7,10 +7,33 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import * as SecureStore from "expo-secure-store";
+import Axios from "axios";
+import {useEffect, useState} from "react";
 
 export default function MyVoucher({ voucherData, navigation }) {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const availDataVoucher = true;
-  console.log(voucherData, "<<<< from My Voucher");
+  const [rewards, setRewards] = useState([]);
+
+  const fetchReward = async () => {
+    let token = await SecureStore.getItemAsync("accessToken");
+    try {
+      const response = await Axios.get(`${apiUrl}vouchers/my-voucher`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setRewards(response.data);
+    } catch (error) {
+      console.log(error.response.data, "error my vouchers");
+    }
+  };
+
+
+  useEffect(() => {
+    fetchReward();
+  }, []);
 
   if (availDataVoucher) {
     return (
@@ -21,39 +44,43 @@ export default function MyVoucher({ voucherData, navigation }) {
           </View>
 
           {/* card voucher */}
-          <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row mx-1 mb-1">
-            <View className="flex justify-center items-center bg">
-              <Image
-                source={require("../../assets/bloodbuddy.png")}
-                className="w-24 h-32 "
-              />
-            </View>
 
-            <View className="mx-4 w-60 m ">
-              <Text className="text-xl font-normal text-red-700">
-                SAVE 10% OFF
-              </Text>
-              <Text className="text-lg font-semibold">Godiva Cafe</Text>
+          {rewards.map((item) => (
+              <View className="bg-[#F2F2F2] mt-5 p-3 rounded-lg shadow-sm shadow-gray-400 flex flex-row mx-1 mb-1" key={item._id}>
+                <View className="flex justify-center items-center bg">
+                  <Image
+                      source={{ uri: item.voucher.imageUrl }}
+                      className="w-24 h-32 "
+                  />
+                </View>
 
-              <View className="w-56 mb-1">
-                <Text className="text-base font-extralight">
-                  Godiva Cafe is offering Discount of 10% off for 1 ice cream
-                </Text>
-              </View>
+                <View className="mx-4 w-60 m ">
+                  <Text className="text-xl font-normal text-red-700">
+                    SAVE 10% OFF
+                  </Text>
+                  <Text className="text-lg font-semibold">{item.voucher.title}</Text>
 
-              <View className="flex justify-end items-end mr-2">
-                <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
-                  <TouchableOpacity onPress={() => {
-                    navigation.navigate("Home Hospital");
-                  }}>
-                    <Text className="text-lg text-[#f2f2f2] text-center">
-                      Use Voucher
+                  <View className="w-56 mb-1">
+                    <Text className="text-base font-extralight">
+                      {item.voucher.content}
                     </Text>
-                  </TouchableOpacity>
+                  </View>
+
+                  <View className="flex justify-end items-end mr-2">
+                    <View className="bg-red-700 p-1 mt-1 w-28 h-8 rounded-lg">
+                      <TouchableOpacity onPress={() => {
+                        navigation.navigate("Home Hospital");
+                      }}>
+                        <Text className="text-lg text-[#f2f2f2] text-center">
+                          {item.code}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
                 </View>
               </View>
-            </View>
-          </View>
+          ))}
+
         </ScrollView>
       </SafeAreaView>
     );
