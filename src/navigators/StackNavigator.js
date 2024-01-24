@@ -43,7 +43,10 @@ export default function StackNavigator() {
             <Stack.Screen
               name="Book Appointment"
               component={BookAppointment}
-              options={{ headerStyle: { backgroundColor: "#F2F2F2" }, headerBackTitleVisible: false }}
+              options={{
+                headerStyle: { backgroundColor: "#F2F2F2" },
+                headerBackTitleVisible: false,
+              }}
             />
             <Stack.Screen
               name="Detail Rewards"
@@ -53,6 +56,12 @@ export default function StackNavigator() {
             <Stack.Screen
               name="History"
               component={History}
+              options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+              name="My Voucher"
+              component={MyVoucher}
               options={{ headerShown: false }}
             />
           </>
@@ -74,4 +83,3 @@ export default function StackNavigator() {
     </Stack.Navigator>
   );
 }
-
