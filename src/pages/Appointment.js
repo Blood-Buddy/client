@@ -31,7 +31,7 @@ export default function Appointment() {
         console.log(id, "cancel appointment");
         try {
             const token = await SecureStore.getItemAsync('accessToken');
-            const response = await Axios.patch(`${apiUrl}appointment/${id}/cancel`, {
+            const response = await Axios.patch(`${apiUrl}appointment/${id}/cancelled`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
