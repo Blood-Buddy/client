@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import * as SecureStore from 'expo-secure-store';
 import dateFormatter from "../helpers/dateFormatter";
+import { useIsFocused } from "@react-navigation/core";
 export default function Appointment() {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+    const isFocused = useIsFocused();
     const [appointments, setAppointments] = useState([]);
 
 
@@ -23,8 +25,10 @@ export default function Appointment() {
     }
 
     useEffect(() => {
-        fetchAppointments();
-    }, []);
+        if (isFocused) {
+            fetchAppointments();
+        }
+    }, [isFocused]);
 
     if (appointments.length !== 0) {
         return (
