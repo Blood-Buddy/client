@@ -9,7 +9,7 @@ import { LoginContext } from "../context/LoginContext";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import MyVoucher from "../pages/MyVoucher";
-import HomeHospital from "../pages/HomeHospital";
+import HomeHospital from "../pages/hospital/HomeHospital";
 import HomepageHospital from "../pages/hospital/HomepageHospital";
 // console.log(process.env)
 
@@ -25,7 +25,7 @@ export default function StackNavigator() {
         role === "hospital" ? (
           <Stack.Screen
             name="Homepage Hospital"
-            component={HomepageHospital}
+            component={HomeHospital}
             options={{ headerShown: false, title: "Homepage" }}
           />
         ) : (
