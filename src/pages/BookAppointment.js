@@ -18,12 +18,16 @@ export default function BookAppointment({ navigation, route }) {
         { key: 1, value: "Session 1: 06.00 - 11.30" },
         { key: 2, value: "Session 2: 13.30 - 18.00" },
     ]
-    
+    // console.log(requestData, data, "<<<<<<< bookapp");
     const postAppointment = async () => {
         const token = await SecureStore.getItemAsync('accessToken');
+        console.log(token, "token");
+        console.log(requestData.hospitalId, "hospital");
+        console.log(requestData._id, "request id");
+        console.log(date, "date");
+        console.log(session, "session");
         try {
             const response = await Axios.post(`${apiUrl}appointment`, {
-                hospitalId: requestData.hospitalId,
                 requestId: requestData._id,
                 date,
                 session,
