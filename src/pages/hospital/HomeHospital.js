@@ -124,7 +124,7 @@ export default function HomeHospital() {
           <View style={styles.cardBloodRequest}>
             <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
               <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
-                Blood Request
+                Appointments
               </Text>
             </View>
 
@@ -314,10 +314,9 @@ const styles = StyleSheet.create({
   cardBloodRequest: {
     backgroundColor: "#f4f4f4",
     marginTop: 20,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
+    borderTopStartRadius: 30,
+    borderTopEndRadius: 30,
     padding: 10,
-    width: 414,
     height: '100%',
     // height: 500,
   },
@@ -325,6 +324,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4f4f4",
     borderRadius: 10,
     padding: 10,
+    marginVertical: 10,
     width: 350,
     marginTop: 15,
     shadowColor: "grey",
