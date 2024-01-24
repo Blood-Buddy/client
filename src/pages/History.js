@@ -46,17 +46,14 @@ export default function History({ navigation }) {
               <Text className="font-bold text-2xl mb-2">History</Text>
             </View>
             {history.map((item) => (
-              <View className="bg-white mt-5 rounded-md">
+              <View key={item?._id} className="bg-white mt-5 rounded-md">
                 <View className="bg-red-700 rounded-md h-12 justify-center">
                   <Text className="text-white text-lg font-semibold ml-3 ">
-                    {" "}
-                    Destination Hospital
+                    {item?.Hospital?.name}
                   </Text>
                 </View>
                 {/* {console.log(item, 'item')} */}
-                <Text className="mt-2 ml-3 text-2xl font-bold text-red-700">
-                  {item?.Hospital.name}
-                </Text>
+                
                 <View className="flex flex-row">
                   <Text className="mt-2 ml-3 text-lg">Address</Text>
                   <Text style={styles.textAddress}>

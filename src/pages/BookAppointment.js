@@ -9,7 +9,7 @@ import dateFormatter from "../helpers/dateFormatter";
 
 export default function BookAppointment({ navigation, route }) {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-    const {requestData} = route.params
+    const { requestData } = route.params
     const [date, setDate] = useState('');
     const [session, setSession] = useState(1);
     const [modalVisible, setModalVisible] = useState(false);
@@ -18,14 +18,16 @@ export default function BookAppointment({ navigation, route }) {
         { key: 1, value: "Session 1: 06.00 - 11.30" },
         { key: 2, value: "Session 2: 13.30 - 18.00" },
     ]
+
+    // console.log(requestData, "requestData");
     // console.log(requestData, data, "<<<<<<< bookapp");
     const postAppointment = async () => {
         const token = await SecureStore.getItemAsync('accessToken');
-        console.log(token, "token");
-        console.log(requestData.hospitalId, "hospital");
-        console.log(requestData._id, "request id");
-        console.log(date, "date");
-        console.log(session, "session");
+        // console.log(token, "token");
+        // console.log(requestData.hospitalId, "hospital");
+        // console.log(requestData._id, "request id");
+        // console.log(date, "date");
+        // console.log(session, "session");
         try {
             const response = await Axios.post(`${apiUrl}appointment`, {
                 requestId: requestData._id,
@@ -37,7 +39,7 @@ export default function BookAppointment({ navigation, route }) {
                 }
             }
             );
-            if(response) {
+            if (response) {
                 setModalVisible(true)
             }
         } catch (error) {
@@ -46,60 +48,64 @@ export default function BookAppointment({ navigation, route }) {
     }
     return (
         <>
-            <Calendar
-                onDayPress={day => {
-                    setDate(day.dateString);
-                }}
-                markedDates={{
-                    [date]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange', selectedColor: '#AE2111' }
-                }}
-                theme={{
-                    todayTextColor: '#AE2111',
-                    arrowColor: '#AE2111',
-                    indicatorColor: '#AE2111',
-                }}
-            />
+            <SafeAreaView>
+                <Calendar
+                    onDayPress={day => {
+                        setDate(day.dateString);
+                    }}
+                    markedDates={{
+                        [date]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange', selectedColor: '#AE2111' }
+                    }}
+                    theme={{
+                        todayTextColor: '#AE2111',
+                        arrowColor: '#AE2111',
+                        indicatorColor: '#AE2111',
+                    }}
+                />
+                <View className='rounded-lg'>
 
-            <View className="bg-red-700 mt-3 p-3">
-                <Text className="text-white text-lg font-bold">Hospital Destination</Text>
-            </View>
-            <View className='p-3'>
-                <Text className="text-red-700 text-2xl font-bold">{requestData?.hospital[0]?.name}</Text>
-                <Text className='mt-2'>Address: {requestData?.hospital[0]?.address}</Text>
-                <Text className='mt-2'>Phone Number: {requestData?.hospital[0]?.phoneNumber}</Text>
-                {date ? <Text className='mt-2'>Selected Date: {dateFormatter(date)}</Text> : null}
-                <View className='mt-2'>
-                    <SelectList
-                        setSelected={(val) => setSession(val)}
-                        data={data}
-                        save="key"
-                        placeholder="Select Session: "
-                        search={false}
-                    />
-                </View>
-                <TouchableOpacity onPress={postAppointment} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
-                    <Text className="text-[#f2f2f2] font-bold text-xl">Book Appointment</Text>
-                </TouchableOpacity>
-            </View>
-
-            <Modal animationType="fade" transparent={false} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
-                <SafeAreaView className='items-center justify-center'>
-                    <View className='items-center justify-center h-full'>
-                        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                            <MaterialIcons name="thumb-up-off-alt" size={48} color="#AE2111" />
-                        </TouchableOpacity>
-                        <Text className='text-4xl'>Thank You!</Text>
-                        <Text className='text-center mt-2'>You have successfully created an appointment. You can always access and edit your appointment in Appointment page.</Text>
-                        <Text className='text-center text-[#2e2e2e]/50 mt-2'>Please show the QR code below to the {requestData?.hospital[0]?.name} staff.</Text>
-                        <View className='mt-2 w-full'>
-                            <TouchableOpacity onPress={() => navigation.navigate("Appointment")} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
-                                <Text className="text-[#f2f2f2] font-bold text-xl">Done</Text>
-                            </TouchableOpacity>
+                    <View className="bg-red-700 p-3">
+                        <Text className="text-white text-lg font-bold">Hospital Destination</Text>
+                    </View>
+                    <View className='p-3 bg-white rounded-lg'>
+                        <Text className="text-red-700 text-2xl font-bold">{requestData?.hospital?.name}</Text>
+                        <Text className='mt-2'>Address: {requestData?.hospital?.address}</Text>
+                        <Text className='mt-2'>Phone Number: {requestData?.hospital?.phoneNumber}</Text>
+                        {date ? <Text className='mt-2'>Selected Date: {dateFormatter(date)}</Text> : null}
+                        <View className='mt-2'>
+                            <SelectList
+                                setSelected={(val) => setSession(val)}
+                                data={data}
+                                save="key"
+                                placeholder="Select Session: "
+                                search={false}
+                            />
                         </View>
                     </View>
+                </View>
+                <TouchableOpacity onPress={postAppointment} className="flex flex-col-reverse mt-2 mx-2 bg-red-700 p-3 items-center justify-center rounded-lg">
+                    <Text className="text-[#f2f2f2] font-bold text-xl">Book Appointment</Text>
+                </TouchableOpacity>
 
-                </SafeAreaView>
-            </Modal>
+                <Modal animationType="fade" transparent={false} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
+                    <SafeAreaView className='items-center justify-center'>
+                        <View className='items-center justify-center h-full'>
+                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                                <MaterialIcons name="thumb-up-off-alt" size={48} color="#AE2111" />
+                            </TouchableOpacity>
+                            <Text className='text-4xl'>Thank You!</Text>
+                            <Text className='text-center mt-2'>You have successfully created an appointment. You can always access and edit your appointment in Appointment page.</Text>
+                            <Text className='text-center text-[#2e2e2e]/50 mt-2'>To access the QR code, go to Appointment page, and tap on the Show QR button.</Text>
+                            <View className='mt-2 w-full'>
+                                <TouchableOpacity onPress={() => navigation.navigate("Appointment")} className="flex flex-col-reverse mt-2 bg-red-700 p-3 items-center justify-center rounded-lg">
+                                    <Text className="text-[#f2f2f2] font-bold text-xl">Done</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                    </SafeAreaView>
+                </Modal>
+            </SafeAreaView>
         </>
 
     )

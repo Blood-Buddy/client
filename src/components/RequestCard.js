@@ -6,14 +6,13 @@ export default function RequestCard({ data, navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
-
     // console.log(data, 'data request card');
     return (
         data?.map((item) => (
             <View key={item?._id} className="mt-4 bg-white rounded-lg shadow-md">
                 <View className='bg-red-700 rounded-t-lg px-6 py-1 justify-center'>
 
-                    <Text className='text-white text-2xl font-bold'>{item?.hospital[0]?.name}</Text>
+                    <Text className='text-white text-2xl font-bold'>{item?.hospital?.name}</Text>
                 </View>
                 {/* {console.log(item.hospital, 'hospital')} */}
                 <Text className='mt-2 mx-6 '>{item?.description}</Text>
