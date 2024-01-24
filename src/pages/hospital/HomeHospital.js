@@ -150,7 +150,6 @@ export default function HomeHospital({navigation}) {
 
               {/* card patient */}
               {appointments.map((appointment, index) => (
-                <>
                   <View key={index} style={styles.appointmentContainer}>
                     <View style={styles.appointmentInfoContainer}>
                       <Text style={styles.label}>Name</Text>
@@ -196,7 +195,6 @@ export default function HomeHospital({navigation}) {
                       <Text style={styles.value}> {appointment?.date.slice(0, 10)}</Text>
                     </View>
                   </View>
-                </>
               ))}
             </View>
           </View>
