@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 import Axios from "axios";
 import dateFormatter from "../helpers/dateFormatter";
+import Toast from "react-native-toast-message";
 
 export default function BookAppointment({ navigation, route }) {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -43,7 +44,10 @@ export default function BookAppointment({ navigation, route }) {
                 setModalVisible(true)
             }
         } catch (error) {
-            console.log(error);
+            Toast.show({
+                type: 'success',
+                text1: error.response.data.message
+            });
         }
     }
     return (
