@@ -17,7 +17,7 @@ import Axios from "axios";
 // const token = await SecureStore.getItemAsync('accessToken');
 // console.log('Token fetched:', token);
 
-export default function HomeHospital() {
+export default function HomeHospital({navigation}) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const isFocused = useIsFocused();
 
@@ -115,18 +115,21 @@ export default function HomeHospital() {
               </View>
             </View>
 
-            {/* saldo */}
-            <View style={styles.cardSaldo}>
-              <View className="flex flex-row justify-between items-center">
-                <Text className="mt-1 ml-3 text-2xl font-base mb-1">
-                  Balance Amount
-                </Text>
-                <View className="mr-2">
-                  <TouchableOpacity>
-                    <AntDesign name="pluscircle" size={24} color="#AE2111" />
-                  </TouchableOpacity>
-                </View>
+          {/* saldo */}
+          <View style={styles.cardSaldo}>
+            <View className="flex flex-row justify-between items-center">
+              <Text className="mt-1 ml-3 text-2xl font-base mb-1">
+                Balance Amount
+              </Text>
+              <View className="mr-2">
+                <TouchableOpacity onPress={() => {
+                  navigation.removeListener;
+                  navigation.navigate("InputBalance");
+                }}>
+                  <AntDesign name="pluscircle" size={24} color="#AE2111" />
+                </TouchableOpacity>
               </View>
+            </View>
 
               <View style={styles.centerLine}>
                 <View style={styles.line}></View>

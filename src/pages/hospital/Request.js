@@ -4,13 +4,13 @@ import { KeyboardAvoidingView, SafeAreaView, ScrollView, Text, TextInput, Toucha
 import { Calendar } from "react-native-calendars";
 import { SelectList } from "react-native-dropdown-select-list";
 import * as SecureStore from 'expo-secure-store';
-
+import Toast from "react-native-toast-message";
 
 export default function Request({ navigation }) {
     const [date, setDate] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState("");
     const [blood, setBlood] = useState({});
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const totalRequest = 0;
@@ -41,19 +41,19 @@ export default function Request({ navigation }) {
                 totalRequest: quantity
             };
             
-            console.log(`${apiUrl}request`, 'aaaa')
-            console.log(requestData);
             const response = await Axios.post(`${apiUrl}request`, requestData, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 }
             });
-            console.log(response, "response post request");
             if (response) {
                 navigation.navigate("Homepage");
             }
         } catch (error) {
-            console.log(error, "error post request");
+            Toast.show({
+                type: 'success',
+                text1: error.response.data.message
+            });
         }
     }
 
