@@ -54,7 +54,7 @@ export default function Appointment() {
                                         <View className="flex-row items-center">
                                             <View className="mt-2 pr-2 w-1/3 border-r-2 h-14 border-r-red-700 items-center justify-center">
                                                 <Text className="font-bold text-sm text-red-700">Date</Text>
-                                                <Text className="text-md text-center">{item?.date}</Text>
+                                                <Text className="text-xs text-center">{dateFormatter(item?.date.slice(0, 10))}</Text>
                                             </View>
                                             <View className="mt-2 px-2 w-1/3 border-r-2 border-r-red-700 h-14 items-center justify-center">
                                                 <Text className="font-bold text-sm text-red-700">Session</Text>

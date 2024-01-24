@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import * as SecureStore from 'expo-secure-store';
 import Axios from "axios";
+import dateFormatter from "../helpers/dateFormatter";
 
 export default function History({ navigation }) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -71,7 +72,7 @@ export default function History({ navigation }) {
                   <View className="flex-row items-center">
                     <View className="pr-2 w-1/3 border-r-2 h-14 border-r-red-700 items-center justify-center">
                       <Text className="font-bold text-sm text-red-700">Date</Text>
-                      <Text className="text-md text-center">{item?.updatedAt}</Text>
+                      <Text className="text-xs text-center">{dateFormatter(item?.updatedAt.slice(0, 10))}</Text>
                     </View>
                     <View className="px-2 w-1/3 border-r-2 border-r-red-700 h-14 items-center justify-center">
                       <Text className="font-bold text-sm text-red-700">Session</Text>

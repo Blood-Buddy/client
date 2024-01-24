@@ -5,26 +5,30 @@ import Axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { useIsFocused } from "@react-navigation/native";
 import RequestCard from "../components/RequestCard";
-
+import dateFormatter from "../helpers/dateFormatter";
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Homepage({ navigation }) {
     const isFocused = useIsFocused();
     const [user, setUser] = useState([]);
     const [requests, setRequests] = useState([]);
+    const [history, setHistory] = useState([]);
 
     const fetchUserAndRequests = async () => {
         try {
             const token = await SecureStore.getItemAsync('accessToken');
             // console.log('Token fetched:', token);
     
-            const [userData, requestsData] = await Promise.all([
+            const [userData, requestsData, historyData] = await Promise.all([
                 Axios.get(`${apiUrl}user`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                Axios.get(`${apiUrl}request`, { headers: { 'Authorization': `Bearer ${token}` } })
+                Axios.get(`${apiUrl}request`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                Axios.get(`${apiUrl}appointment/history`, { headers: { 'Authorization': `Bearer ${token}` } }),
             ]);
             // console.log('User data fetched:', userData.data);
-            console.log('Requests data fetched:', requestsData.data);
+            // console.log('Requests data fetched:', requestsData.data);
+            // console.log('History data fetched:', historyData.data);
     
+            setHistory(historyData.data)
             setUser(userData.data);
             setRequests(requestsData.data);
         } catch (error) {
@@ -77,9 +81,9 @@ export default function Homepage({ navigation }) {
                                     Total Donor
                                 </Text>
                                 <Text className="text-md">
-                                    {user[0]?.appointment[0]?.status === 'completed' ?
-                                        user[0]?.appointment.length > 1 ?
-                                            `${user[0]?.appointment.length} times` :
+                                    {history[0]?.status === 'completed' ?
+                                        history[0]?.length > 1 ?
+                                            `${history[0]?.length} times` :
                                             '1 time'
                                         : '-'
                                     }
@@ -90,9 +94,9 @@ export default function Homepage({ navigation }) {
                                 <Text className="font-bold text-sm text-red-700">
                                     Last Donor
                                 </Text>
-                                <Text className="text-md">
-                                    {user[0]?.appointment[0]?.status === 'completed' ?
-                                        user[0]?.appointment[0]?.date:
+                                <Text className="text-xs">
+                                    {history[0]?.status === 'completed' ?
+                                        dateFormatter(history[0]?.updatedAt.slice(0, 10)) :
                                         '-'
                                     }
                                 </Text>
