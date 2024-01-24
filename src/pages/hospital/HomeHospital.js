@@ -7,18 +7,53 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
+import Axios from "axios";
+
+
+// const token = await SecureStore.getItemAsync('accessToken');
+// console.log('Token fetched:', token);
 
 export default function HomeHospital() {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+  const isFocused = useIsFocused();
+
+  const [hospitalProfile, setHospitalProfile] = useState([])
+
+  const fetchHospitalProfile = async () => {
+    const token = await SecureStore.getItemAsync('accessToken');
+    // console.log('Token fetched:', token);
+    try {
+      const response = await Axios.get(`${apiUrl}hospital`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setHospitalProfile(response.data);
+    } catch (error) {
+      console.log('Error fetching hospital profile:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchHospitalProfile();
+    }
+  }, [isFocused]);
+
+
+  // console.log(hospitalProfile);
   return (
-    <ScrollView className="bg-red-700 px-5 h-full">
-      <SafeAreaView className="mx-5 px-5">
+    <SafeAreaView className="bg-red-700">
+      <ScrollView className="px-5 h-full">
         <View style={styles.container}>
           {/* profile */}
           <View style={styles.card}>
             <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
-              Rumah Sakit Pondok Indah
+              {hospitalProfile?.name}
             </Text>
 
             <View style={styles.centerLine}>
@@ -26,30 +61,53 @@ export default function HomeHospital() {
             </View>
 
             <View className="flex flex-row">
-              <Text className="mt-2 ml-3 text-lg">Address</Text>
+              <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Address</Text>
               <Text style={styles.textAddress}>
-                : Jalan Metro Duta Kav. UE Pd. Pinang Kec. Kby lama, Daerah
-                Khusus Ibukota Jakarta, 12310
+                : {hospitalProfile?.address}
               </Text>
             </View>
             <View className="flex flex-row">
-              <Text className="mt-2 ml-3 text-lg">Phone</Text>
-              <Text style={styles.textPhone}>: (021) 7657525</Text>
+              <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Phone</Text>
+              <Text style={styles.textPhone}>: {hospitalProfile?.phoneNumber}</Text>
             </View>
-            <View className="flex flex-row mb-4">
-              <Text className="mt-2 ml-3 text-lg">Blood Stock</Text>
-              <Text style={styles.textPhone}>: 3</Text>
+            <View className="flex mb-4">
+              <View className='flex flex-row'>
+                <View className='border-b-2 w-full items-center justify-center'>
+
+                  <Text className="mt-2 font-base text-2xl text-center w-full">Blood Stock </Text>
+                </View>
+              </View>
+              <View className='flex flex-row'>
+                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type A</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.A}</Text>
+              </View>
+              <View className='flex flex-row'>
+                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type B</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.B}</Text>
+              </View>
+              <View className='flex flex-row'>
+                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type AB</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.AB}</Text>
+              </View>
+              <View className='flex flex-row'>
+                <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type O</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.O}</Text>
+              </View>
+
+
             </View>
           </View>
 
           {/* saldo */}
           <View style={styles.cardSaldo}>
-            <View className="flex flex-row justify-between">
+            <View className="flex flex-row justify-between items-center">
               <Text className="mt-1 ml-3 text-2xl font-base mb-1">
                 Balance Amount
               </Text>
               <View className="mr-2">
-                <AntDesign name="pluscircle" size={24} color="#AE2111" />
+                <TouchableOpacity>
+                  <AntDesign name="pluscircle" size={24} color="#AE2111" />
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -57,9 +115,8 @@ export default function HomeHospital() {
               <View style={styles.line}></View>
             </View>
 
-            <View className="flex flex-row bg">
-              <Text className="mt-4 ml-3 text-lg">Rp.</Text>
-              <Text style={styles.texBalance}>500.000</Text>
+            <View className="flex flex-row ml-2">
+              <Text style={styles.texBalance}>{hospitalProfile?.balance?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
             </View>
           </View>
 
@@ -187,8 +244,8 @@ export default function HomeHospital() {
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -196,6 +253,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+  },
+  label: {
+    width: 120,
+  },
+  labelTop: {
+    width: 65,
   },
   borderBottom: {
     borderBottomColor: "red",
@@ -206,6 +269,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textAddress: {
+    flex: 1,
     marginTop: 12,
     marginLeft: 3,
     fontSize: 17,
@@ -214,10 +278,10 @@ const styles = StyleSheet.create({
   },
   textPhone: {
     marginTop: 12,
-    marginLeft: 16,
+    marginLeft: 3,
     fontSize: 17,
     justifyContent: "center",
-    width: 300,
+    width: 255,
   },
   line: {
     borderColor: "black",
@@ -254,6 +318,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     padding: 10,
     width: 414,
+    height: '100%',
     // height: 500,
   },
   cardPatient: {

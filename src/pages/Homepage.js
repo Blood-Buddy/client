@@ -18,7 +18,7 @@ export default function Homepage({ navigation }) {
         try {
             const token = await SecureStore.getItemAsync('accessToken');
             // console.log('Token fetched:', token);
-    
+
             const [userData, requestsData, historyData] = await Promise.all([
                 Axios.get(`${apiUrl}user`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 Axios.get(`${apiUrl}request`, { headers: { 'Authorization': `Bearer ${token}` } }),
@@ -27,12 +27,12 @@ export default function Homepage({ navigation }) {
             // console.log('User data fetched:', userData.data);
             // console.log('Requests data fetched:', requestsData.data);
             // console.log('History data fetched:', historyData.data);
-    
+
             setHistory(historyData.data)
             setUser(userData.data);
             setRequests(requestsData.data);
         } catch (error) {
-            console.error('Error fetching user and requests:', error);
+            console.log('Error fetching user and requests:', error);
         }
     };
 

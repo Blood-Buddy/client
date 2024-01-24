@@ -179,7 +179,7 @@ export default function Register({ navigation }) {
         password,
         name,
         nik,
-        phone,
+        phoneNumber,
         address,
         province,
         bloodType

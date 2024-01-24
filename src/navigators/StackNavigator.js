@@ -10,7 +10,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import MyVoucher from "../pages/MyVoucher";
 import HomeHospital from "../pages/hospital/HomeHospital";
-import HomepageHospital from "../pages/hospital/HomepageHospital";
+import TabNavigatorHospital from "./TabNavigatorHospital";
 // console.log(process.env)
 
 const Stack = createStackNavigator();
@@ -23,8 +23,8 @@ export default function StackNavigator() {
         role === "hospital" ? (
           <Stack.Screen
             name="Homepage Hospital"
-            component={HomeHospital}
-            options={{ headerShown: false, title: "Homepage" }}
+            component={TabNavigatorHospital}
+            options={{ headerShown: false, title: "Homepage", }}
           />
         ) : (
           <>
