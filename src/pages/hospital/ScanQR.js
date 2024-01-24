@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const navigation = useNavigation()
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -16,12 +18,11 @@ export default function App() {
     }, []);
 
     const handleBarCodeScanned = ({ type, data }) => {
-
+        const { appointment } = JSON.parse(data);
+        // console.log(appointment, "<<<<<<");
+        // alert(`Donor ${appointment.name}, NIK ${appointment.nik} validated!`);
         setScanned(true);
-        console.log(data, 'data');
-        // console.log(data.appointment._id, 'appointment id');
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-
+        navigation.navigate("Detail Appointment", { appointment });
     };
 
     if (hasPermission === null) {
