@@ -17,7 +17,7 @@ import Axios from "axios";
 // const token = await SecureStore.getItemAsync('accessToken');
 // console.log('Token fetched:', token);
 
-export default function HomeHospital({navigation}) {
+export default function HomeHospital({ navigation }) {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const isFocused = useIsFocused();
 
@@ -115,21 +115,21 @@ export default function HomeHospital({navigation}) {
               </View>
             </View>
 
-          {/* saldo */}
-          <View style={styles.cardSaldo}>
-            <View className="flex flex-row justify-between items-center">
-              <Text className="mt-1 ml-3 text-2xl font-base mb-1">
-                Balance Amount
-              </Text>
-              <View className="mr-2">
-                <TouchableOpacity onPress={() => {
-                  navigation.removeListener;
-                  navigation.navigate("InputBalance");
-                }}>
-                  <AntDesign name="pluscircle" size={24} color="#AE2111" />
-                </TouchableOpacity>
+            {/* saldo */}
+            <View style={styles.cardSaldo}>
+              <View className="flex flex-row justify-between items-center">
+                <Text className="mt-1 ml-3 text-2xl font-base mb-1">
+                  Balance Amount
+                </Text>
+                <View className="mr-2">
+                  <TouchableOpacity onPress={() => {
+                    navigation.removeListener;
+                    navigation.navigate("InputBalance");
+                  }}>
+                    <AntDesign name="pluscircle" size={24} color="#AE2111" />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
 
               <View style={styles.centerLine}>
                 <View style={styles.line}></View>
@@ -205,9 +205,84 @@ export default function HomeHospital({navigation}) {
     );
   } else {
     return (
-      <SafeAreaView>
-        <ScrollView>
-          <Text>Kosong</Text>
+      <SafeAreaView className="">
+        <ScrollView className="px-5 h-full">
+          <View style={styles.container}>
+            {/* profile */}
+            <View style={styles.card}>
+              <Text className="mt-1 ml-3 text-2xl font-base text-center mb-1">
+                {hospitalProfile?.name}
+              </Text>
+
+              <View style={styles.centerLine}>
+                <View style={styles.line}></View>
+              </View>
+
+              <View className="flex flex-row">
+                <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Address</Text>
+                <Text style={styles.textAddress}>
+                  : {hospitalProfile?.address}
+                </Text>
+              </View>
+              <View className="flex flex-row">
+                <Text className="mt-2 ml-3 text-lg" style={styles.labelTop}>Phone</Text>
+                <Text style={styles.textPhone}>: {hospitalProfile?.phoneNumber}</Text>
+              </View>
+              <View className="flex mb-4">
+                <View className='flex flex-row'>
+                  <View className='border-b-2 w-full items-center justify-center'>
+
+                    <Text className="mt-2 font-base text-2xl text-center w-full">Blood Stock </Text>
+                  </View>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type A</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.A}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type B</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.B}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type AB</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.AB}</Text>
+                </View>
+                <View className='flex flex-row'>
+                  <Text className="mt-2 ml-3 text-lg" style={styles.label}>Blood Type O</Text>
+                  <Text style={styles.textPhone}>: {hospitalProfile?.bloodStock?.O}</Text>
+                </View>
+              </View>
+            </View>
+
+            {/* saldo */}
+            <View style={styles.cardSaldo}>
+              <View className="flex flex-row justify-between items-center">
+                <Text className="mt-1 ml-3 text-2xl font-base mb-1">
+                  Balance Amount
+                </Text>
+                <View className="mr-2">
+                  <TouchableOpacity onPress={() => {
+                    navigation.removeListener;
+                    navigation.navigate("InputBalance");
+                  }}>
+                    <AntDesign name="pluscircle" size={24} color="#AE2111" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={styles.centerLine}>
+                <View style={styles.line}></View>
+              </View>
+
+              <View className="flex flex-row ml-2">
+                <Text style={styles.texBalance}>{hospitalProfile?.balance?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
+              </View>
+            </View>
+
+            <View className="mt-24">
+                  <Text className="text-center font-bold text-xl text-red-700">Currently have no appointment.</Text>
+            </View>
+          </View>
         </ScrollView>
       </SafeAreaView>
     )
