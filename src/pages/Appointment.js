@@ -15,6 +15,7 @@ export default function Appointment() {
     const fetchAppointments = async () => {
         try {
             const token = await SecureStore.getItemAsync('accessToken');
+            // console.log(token, "token");
             const response = await Axios.get(`${apiUrl}appointment`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -23,6 +24,22 @@ export default function Appointment() {
             setAppointments(response.data);
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    const cancelAppointment = async (id) => {
+        console.log(id, "cancel appointment");
+        try {
+            const token = await SecureStore.getItemAsync('accessToken');
+            const response = await Axios.patch(`${apiUrl}appointment/${id}/cancel`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log(response, "response cancel appointment");
+            fetchAppointments();
+        } catch (error) {
+            console.log(error, "error cancel appointment");
         }
     }
 
@@ -83,7 +100,7 @@ export default function Appointment() {
                                         </View>
 
                                         <View className='w-24'>
-                                            <TouchableOpacity className="mt-2 bg-red-700 p-2 items-center justify-center rounded-lg">
+                                            <TouchableOpacity onPress={() => cancelAppointment(item?._id)} className="mt-2 bg-red-700 p-2 items-center justify-center rounded-lg">
                                                 <Text className="text-[#f2f2f2] font-bold text-md">Cancel</Text>
                                             </TouchableOpacity>
                                         </View>
