@@ -240,6 +240,7 @@ export default function Register({ navigation }) {
 
               <TextInput
                 required
+                keyboardType="numeric"
                 onChangeText={setNik}
                 value={nik}
                 placeholder="NIK"
@@ -252,6 +253,7 @@ export default function Register({ navigation }) {
 
               <TextInput
                 required
+                keyboardType="numeric"
                 onChangeText={setPhoneNumber}
                 value={phoneNumber}
                 placeholder="Phone"

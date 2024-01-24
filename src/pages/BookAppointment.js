@@ -75,6 +75,7 @@ export default function BookAppointment({ navigation, route }) {
                         <Text className="text-red-700 text-2xl font-bold">{requestData?.hospital?.name}</Text>
                         <Text className='mt-2'>Address: {requestData?.hospital?.address}</Text>
                         <Text className='mt-2'>Phone Number: {requestData?.hospital?.phoneNumber}</Text>
+                        <Text className='mt-2 text-red-700'>Only available on: {dateFormatter(requestData?.date.slice(0, 10))}</Text>
                         {date ? <Text className='mt-2'>Selected Date: {dateFormatter(date)}</Text> : null}
                         <View className='mt-2'>
                             <SelectList
