@@ -65,8 +65,8 @@ export default function Appointment() {
                                     <Text className="text-white text-lg font-bold">Hospital Destination</Text>
                                 </View>
                                 <View className='p-3 bg-white rounded-b-lg'>
-                                    <Text className="text-red-700 text-2xl font-bold">{item?.hospital[0]?.name}</Text>
-                                    <Text className='mt-2'>Address: {item?.hospital[0]?.address[0]}</Text>
+                                    <Text className="text-red-700 text-2xl font-bold">{item?.hospital?.name}</Text>
+                                    <Text className='mt-2'>Address: {item?.hospital?.address}</Text>
                                     <Text className='mt-2'>{`Phone Number: (021) 1234567 `}</Text>
                                     <View>
 

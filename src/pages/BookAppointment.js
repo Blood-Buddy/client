@@ -21,11 +21,11 @@ export default function BookAppointment({ navigation, route }) {
 
     // console.log(requestData, "requestData");
     // console.log(requestData, data, "<<<<<<< bookapp");
+    // console.log(requestData._id, "request id");
     const postAppointment = async () => {
         const token = await SecureStore.getItemAsync('accessToken');
         // console.log(token, "token");
         // console.log(requestData.hospitalId, "hospital");
-        // console.log(requestData._id, "request id");
         // console.log(date, "date");
         // console.log(session, "session");
         try {

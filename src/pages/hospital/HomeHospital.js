@@ -41,7 +41,7 @@ export default function HomeHospital({ navigation }) {
 
   const fetchAppointments = async () => {
     const token = await SecureStore.getItemAsync('accessToken');
-    console.log(token, "token");
+    // console.log(token, "token");
     try {
       const response = await Axios.get(`${apiUrl}appointment/hospital`, {
         headers: {
