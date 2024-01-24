@@ -19,7 +19,7 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [nik, setNik] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
 
 
@@ -252,8 +252,8 @@ export default function Register({ navigation }) {
 
               <TextInput
                 required
-                onChangeText={setPhone}
-                value={phone}
+                onChangeText={setPhoneNumber}
+                value={phoneNumber}
                 placeholder="Phone"
                 className="mt-1 mx-4  rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />

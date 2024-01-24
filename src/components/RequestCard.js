@@ -13,8 +13,9 @@ export default function RequestCard({ data, navigation }) {
             <View key={item?._id} className="mt-4 bg-white rounded-lg shadow-md">
                 <View className='bg-red-700 rounded-t-lg px-6 py-1 justify-center'>
 
-                    <Text className='text-white text-2xl font-bold'>Rumah Sakit Pondok Indah</Text>
+                    <Text className='text-white text-2xl font-bold'>{item?.hospital[0]?.name}</Text>
                 </View>
+                {/* {console.log(item.hospital, 'hospital')} */}
                 <Text className='mt-2 mx-6 '>{item?.description}</Text>
                     <Text className='mt-2 mx-6 '>Blood type A needed: {item?.bloodType?.A?.request}, collected: {item?.bloodType?.A?.collected}</Text>
                     <Text className='mt-2 mx-6 '>Blood type B needed: {item?.bloodType?.B?.request}, collected: {item?.bloodType?.B?.collected}</Text>

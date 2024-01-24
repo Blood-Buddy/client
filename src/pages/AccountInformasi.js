@@ -1,4 +1,3 @@
-import { Feather } from "@expo/vector-icons";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,24 +7,19 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Animated } from "react-native";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import { SelectList } from "react-native-dropdown-select-list";
 
 export default function AccountInformasi({ navigation }) {
-  const av = new Animated.Value(0);
-  av.addListener(() => {
-    return;
-  });
 
   const [bloodType, setBloodType] = useState("");
   const [province, setProvince] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [nik, setNik] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
 
   const provinceData = [
@@ -192,8 +186,6 @@ export default function AccountInformasi({ navigation }) {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      console.log(response.data, "=== account informasi putuser");
       navigation.navigate("Homepage");
     } catch (error) {
       console.log(error, "account Informasi");
@@ -202,8 +194,6 @@ export default function AccountInformasi({ navigation }) {
 
   const loadUser = async () => {
     try {
-      console.log("masuk halaman account informasi");
-
       let token = await SecureStore.getItemAsync("accessToken");
       const response = await Axios.get(`${apiUrl}user`, {
         headers: {
@@ -211,27 +201,25 @@ export default function AccountInformasi({ navigation }) {
         },
       });
 
-      console.log(response.data, "load user di account informasi");
+      // console.log(response.data, "load user di account informasi");
       response.data.map((item) => {
         setEmail(item.email);
         setName(item.name);
         setNik(item.nik);
-        setPhone(item.phone);
+        setPhoneNumber(item.phone);
         setAddress(item.address);
         setProvince(item.province);
         setBloodType(item.bloodType);
       })
 
     } catch (error) {
-      // console.log(error, ">> account Informasi");
+      console.log(error, ">> account Informasi");
     }
   };
 
   useEffect(() => {
     loadUser();
   }, []);
-
-  // console.log(name, 'populate');
 
   return (
     <SafeAreaView className="mx-5 px-5">
@@ -289,8 +277,8 @@ export default function AccountInformasi({ navigation }) {
 
           <TextInput
             placeholder="Phone number"
-            value={phone}
-            onChangeText={(text) => setPhone(text)}
+            value={phoneNumber}
+            onChangeText={(text) => setPhoneNumber(text)}
             className="mt-1 rounded-md border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
         </View>
@@ -343,9 +331,5 @@ const styles = StyleSheet.create({
   borderBottom: {
     borderBottomColor: "red",
     borderBottomWidth: 1,
-  },
-  // fontSize: {
-  //   fontSize: 16,
-  //   marginLeft:20
-  // }
+  }
 });

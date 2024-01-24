@@ -37,68 +37,64 @@ export default function History({ navigation }) {
   // console.log(history, 'data');
 
   if (history.length !== 0) {
-  return (
-    <>
-      <SafeAreaView className="mx-5 px-5">
-        <ScrollView className="bg-[#F2F2F2]">
-          <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
-            <Text className="font-bold text-2xl mb-2">History</Text>
-          </View>
-          {history.map((item) => (
-            <View className="bg-white mt-5 rounded-md">
-              <View className="bg-red-700 rounded-md h-12 justify-center">
-                <Text className="text-white text-lg font-semibold ml-3 ">
-                  {" "}
-                  Destination Hospital
-                </Text>
-              </View>
-
-              <Text className="mt-2 ml-3 text-2xl font-bold text-red-700">
-                {item?.Hospital.name}
-              </Text>
-              <View className="flex flex-row">
-                <Text className="mt-2 ml-3 text-lg">Address</Text>
-                <Text style={styles.textAddress}>
-                  : {item?.Hospital.address}
-                </Text>
-              </View>
-              <View className="flex flex-row">
-                <Text className="mt-2 ml-3 text-lg">Phone</Text>
-                <Text style={styles.textPhone}>: {item?.Hospital.phone}</Text>
-              </View>
-
-              <View className="flex flex-row mt-5 mb-5">
-                <View className=" mr-1">
-                  <Text className="ml-3 text-xl text-red-700 font-medium">
-                    Date
-                  </Text>
-                  <Text className=" ml-3 text-lg">24-12-2023</Text>
-                </View>
-
-                <View style={styles.line}></View>
-
-                <View className=" mr-1">
-                  <Text className="ml-3 text-xl text-red-700 font-medium">
-                    Session
-                  </Text>
-                  <Text className=" ml-3 text-lg">1 (06.00 - 11.30)</Text>
-                </View>
-
-                <View style={styles.line}></View>
-
-                <View className="mr-1">
-                  <Text className="ml-3 text-xl text-red-700 font-medium">
-                    Status
-                  </Text>
-                  <Text className=" ml-3 text-lg text-green-500">Completed</Text>
-                </View>
-              </View>
+    return (
+      <>
+        <SafeAreaView className="mx-5 px-5 h-full">
+          <ScrollView className="bg-[#F2F2F2]">
+            <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
+              <Text className="font-bold text-2xl mb-2">History</Text>
             </View>
-          ))}
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
+            {history.map((item) => (
+              <View className="bg-white mt-5 rounded-md">
+                <View className="bg-red-700 rounded-md h-12 justify-center">
+                  <Text className="text-white text-lg font-semibold ml-3 ">
+                    {" "}
+                    Destination Hospital
+                  </Text>
+                </View>
+                {/* {console.log(item, 'item')} */}
+                <Text className="mt-2 ml-3 text-2xl font-bold text-red-700">
+                  {item?.Hospital.name}
+                </Text>
+                <View className="flex flex-row">
+                  <Text className="mt-2 ml-3 text-lg">Address</Text>
+                  <Text style={styles.textAddress}>
+                    : {item?.Hospital.address}
+                  </Text>
+                </View>
+                <View className="flex flex-row">
+                  <Text className="mt-2 ml-3 text-lg">Phone</Text>
+                  <Text style={styles.textPhone}>: {item?.Hospital?.phoneNumber}</Text>
+                </View>
+
+                <View className='mb-2'>
+                  <View className="flex-row items-center">
+                    <View className="pr-2 w-1/3 border-r-2 h-14 border-r-red-700 items-center justify-center">
+                      <Text className="font-bold text-sm text-red-700">Date</Text>
+                      <Text className="text-md text-center">{item?.updatedAt}</Text>
+                    </View>
+                    <View className="px-2 w-1/3 border-r-2 border-r-red-700 h-14 items-center justify-center">
+                      <Text className="font-bold text-sm text-red-700">Session</Text>
+                      <Text className="text-md">
+                        {item?.session === 1 ? "06.00 - 11.30" : item?.session === 2 ? "13.30 - 18.00" : ""}
+                      </Text>
+                    </View>
+
+                    <View className="px-2 w-1/3 items-center">
+                      <Text className="font-bold text-sm text-red-700 ">Status</Text>
+                      <Text className={`text-md ${item?.status === 'completed' ? 'text-green-500' : item?.status === 'canceled' ? 'text-red-700' : 'text-black/50'}`}>
+                        {item?.status.charAt(0).toUpperCase() + item?.status.slice(1)}
+                      </Text>
+
+                    </View>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </>
+    );
   } else {
     return (
       <SafeAreaView>

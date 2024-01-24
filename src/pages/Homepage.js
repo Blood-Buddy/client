@@ -1,102 +1,71 @@
-import {
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
-import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import RequestCard from "../components/RequestCard";
-import { Animated } from "react-native";
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import Axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { useIsFocused } from "@react-navigation/native";
+import RequestCard from "../components/RequestCard";
 
-const av = new Animated.Value(0);
-av.addListener(() => {
-    return;
-});
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Homepage({ navigation }) {
-    // console.log(token);
     const isFocused = useIsFocused();
-    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [user, setUser] = useState([]);
     const [requests, setRequests] = useState([]);
-    const fetchUser = async () => {
-        let token = await SecureStore.getItemAsync('accessToken')
-        // console.log(token, "tokennnnn");
-        try {
-            const response = await Axios.get(`${apiUrl}user`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
 
-            // console.log(response.data, "data user");
-            setUser(response.data);
+    const fetchUserAndRequests = async () => {
+        try {
+            const token = await SecureStore.getItemAsync('accessToken');
+            // console.log('Token fetched:', token);
+    
+            const [userData, requestsData] = await Promise.all([
+                Axios.get(`${apiUrl}user`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                Axios.get(`${apiUrl}request`, { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
+            // console.log('User data fetched:', userData.data);
+            // console.log('Requests data fetched:', requestsData.data);
+    
+            setUser(userData.data);
+            setRequests(requestsData.data);
         } catch (error) {
-            console.log(error, "homepage");
-            // throw error
+            console.error('Error fetching user and requests:', error);
         }
     };
 
-    const fetchRequests = async () => {
-        const token = await SecureStore.getItemAsync('accessToken');
-        try {
-            const response = await Axios.get(`${apiUrl}request`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (response) {
-                setRequests(response.data);
-            }
-
-        } catch (error) {
-            console.log(JSON.stringify(error), "fetch requests error");
-        }
-    }
-    // console.log(requests, 'fetch request');
-
-
     useEffect(() => {
         if (isFocused) {
-            fetchUser();
-            fetchRequests();
+            fetchUserAndRequests();
         }
     }, [isFocused]);
 
-    // console.log(requests, "requests");
     return (
         <SafeAreaView className="bg-[#F2F2F2]">
             <ScrollView className="px-5 h-full">
-                <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
-                    <Text className="font-bold text-2xl mb-2">Profile</Text>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.removeListener;
-                            navigation.navigate("Account Information");
-                        }}
-                    >
-                        <Feather name="edit-3" size={24} className="text-red-700" />
-                    </TouchableOpacity>
-                </View>
+                {user.length > 0 && (
+                    <View key={user[0]._id}>
+                        <View className="border-b-2 flex-row justify-between items-center border-b-red-700">
+                            <Text className="font-bold text-2xl mb-2">Profile</Text>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.removeListener;
+                                    navigation.navigate("Account Information");
+                                }}
+                            >
+                                <Feather name="edit-3" size={24} className="text-red-700" />
+                            </TouchableOpacity>
+                        </View>
 
-                {user.map((item) => (
-                    <View key={item._id}>
                         <View className="flex-1 flex-row">
                             <View className="mt-2 w-2/3 border-r-2 border-r-red-700">
-                                <Text className="font-bold text-lg">{item?.name}</Text>
-                                <Text className="text-md text-red-700">{item?.nik}</Text>
+                                <Text className="font-bold text-lg">{user[0]?.name}</Text>
+                                <Text className="text-md text-red-700">{user[0]?.nik}</Text>
                             </View>
 
                             <View className="w-1/3">
                                 <View className="flex-1 flex-row items-center">
                                     <Ionicons name="water" size={32} color="#AE2111" />
                                     <Text className="ml-2 text-4xl font-bold">
-                                        {item?.bloodType}
+                                        {user[0]?.bloodType}
                                     </Text>
                                 </View>
                             </View>
@@ -108,32 +77,37 @@ export default function Homepage({ navigation }) {
                                     Total Donor
                                 </Text>
                                 <Text className="text-md">
-                                    {item?.appointment[0]?.status === 'completed' ?
-                                        item?.appointment.length > 1 ?
-                                            `${item?.appointment.length} times` :
+                                    {user[0]?.appointment[0]?.status === 'completed' ?
+                                        user[0]?.appointment.length > 1 ?
+                                            `${user[0]?.appointment.length} times` :
                                             '1 time'
                                         : '-'
                                     }
                                 </Text>
-
                             </View>
+
                             <View className="mt-2 px-2 w-1/3 border-r-2 border-r-red-700">
                                 <Text className="font-bold text-sm text-red-700">
                                     Last Donor
                                 </Text>
-                                <Text className="text-md ">{item?.appointment[0]?.status === 'completed' ? item?.appointment[0]?.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</Text>
+                                <Text className="text-md">
+                                    {user[0]?.appointment[0]?.status === 'completed' ?
+                                        user[0]?.appointment[0]?.date:
+                                        '-'
+                                    }
+                                </Text>
                             </View>
 
                             <View className="mt-2 px-2 w-1/3">
                                 <Text className="font-bold text-sm text-red-700">Rewards</Text>
                                 <View className="flex flex-row items-center">
                                     <FontAwesome5 name="award" size={20} color="#AE2111" />
-                                    <Text className="text-lg ml-1">{item?.points}</Text>
+                                    <Text className="text-lg ml-1">{user[0]?.points}</Text>
                                 </View>
                             </View>
                         </View>
                     </View>
-                ))}
+                )}
 
                 <TouchableOpacity
                     className="mt-2 bg-red-700 p-3 items-center justify-center rounded-lg"
