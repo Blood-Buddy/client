@@ -150,7 +150,6 @@ export default function HomeHospital({ navigation }) {
 
               {/* card patient */}
               {appointments.map((appointment, index) => (
-                <>
                   <View key={index} style={styles.appointmentContainer}>
                     <View style={styles.appointmentInfoContainer}>
                       <Text style={styles.label}>Name</Text>
@@ -196,7 +195,6 @@ export default function HomeHospital({ navigation }) {
                       <Text style={styles.value}> {appointment?.date.slice(0, 10)}</Text>
                     </View>
                   </View>
-                </>
               ))}
             </View>
           </View>
@@ -308,19 +306,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+  // label: {
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  // },
   value: {
     marginLeft: 10,
     fontSize: 16,
   },
-  line: {
-    height: 1,
-    backgroundColor: "gray",
-    marginVertical: 5,
-  },
+  // line: {
+  //   height: 1,
+  //   backgroundColor: "gray",
+  //   marginVertical: 5,
+  // },
   container: {
     flex: 1,
     alignItems: "center",
