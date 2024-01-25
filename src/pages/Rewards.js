@@ -53,7 +53,7 @@ export default function Rewards({ navigation, route }) {
       navigation.navigate("My Voucher", { voucherId: voucherId });
     } catch (error) {
       Toast.show({
-        type: 'success',
+        type: 'error',
         text1: error.response.data.message
       });
     }

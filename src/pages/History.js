@@ -80,7 +80,7 @@ export default function History({ navigation }) {
 
                     <View className="px-2 w-1/3 items-center">
                       <Text className="font-bold text-sm text-red-700 ">Status</Text>
-                      <Text className={`text-md ${item?.status === 'completed' ? 'text-green-500' : item?.status === 'canceled' ? 'text-red-700' : 'text-black/50'}`}>
+                      <Text className={`text-md ${item?.status === 'completed' ? 'text-green-500' : item?.status === 'cancelled' ? 'text-red-700' : 'text-black/50'}`}>
                         {item?.status.charAt(0).toUpperCase() + item?.status.slice(1)}
                       </Text>
 

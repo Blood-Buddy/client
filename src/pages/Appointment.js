@@ -31,12 +31,12 @@ export default function Appointment() {
         console.log(id, "cancel appointment");
         try {
             const token = await SecureStore.getItemAsync('accessToken');
-            const response = await Axios.patch(`${apiUrl}appointment/${id}/cancelled`, {
+            const response = await Axios.get(`${apiUrl}appointment/${id}/cancel`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            console.log(response, "response cancel appointment");
+            // console.log(response, "response cancel appointment");
             fetchAppointments();
         } catch (error) {
             console.log(error, "error cancel appointment");

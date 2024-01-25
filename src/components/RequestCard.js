@@ -7,6 +7,7 @@ import {
     View,
 } from "react-native";
 import Checkbox from 'expo-checkbox';
+import dateFormatter from "../helpers/dateFormatter";
 
 export default function RequestCard({ data, navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +25,6 @@ export default function RequestCard({ data, navigation }) {
         setSelectedItem(null);
         setModalVisible(false);
     };
-
     return (
         <View>
             {data?.map((item) => (
@@ -37,6 +37,8 @@ export default function RequestCard({ data, navigation }) {
                         </View>
                         <Text className='mt-2 mx-6 font-bold text-lg'>{item?.title}</Text>
                         <Text className='mt-2 mx-6 '>{item?.description}</Text>
+                        {/* {console.log(item, "item")} */}
+                        <Text className='mt-2 mx-6 '>{dateFormatter(item?.date?.slice(0, 10))}</Text>
                         <Text className='mt-2 mx-6 '>
                             Blood type A needed: {item?.bloodType?.A?.request},
                             collected: {item?.bloodType?.A?.collected}

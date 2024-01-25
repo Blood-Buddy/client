@@ -45,7 +45,7 @@ export default function BookAppointment({ navigation, route }) {
             }
         } catch (error) {
             Toast.show({
-                type: 'success',
+                type: 'error',
                 text1: error.response.data.message
             });
         }
